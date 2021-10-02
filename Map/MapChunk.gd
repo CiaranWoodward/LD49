@@ -1,3 +1,4 @@
+tool
 extends RigidBody
 
 const width = 5.0
