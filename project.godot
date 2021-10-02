@@ -11,7 +11,12 @@ config_version=4
 [application]
 
 config/name="LD49"
+run/main_scene="res://Map/Map.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [physics]
 
