@@ -910,11 +910,11 @@ position = Vector2( 157.322, 400.048 )
 [node name="Position2D" type="Position2D" parent="."]
 
 [node name="Head" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -203.146 )
+position = Vector2( 0, -199.905 )
 texture = ExtResource( 3 )
 
 [node name="Arms" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -193.333 )
+position = Vector2( 0, -190.148 )
 
 [node name="LeftArm" type="Sprite" parent="Position2D/Arms"]
 position = Vector2( -55, -55 )
@@ -929,7 +929,7 @@ texture = ExtResource( 4 )
 offset = Vector2( -59.4508, 36.6874 )
 
 [node name="Body" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -205.882 )
+position = Vector2( 0, -206.781 )
 texture = ExtResource( 5 )
 
 [node name="Smear" type="Sprite" parent="Position2D"]
