@@ -10,20 +10,26 @@ var normals : PoolVector3Array
 var colors : PoolColorArray
 var plat_height : float = 0
 
+var topperheight : float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	topperheight = $GrassTopper.mesh.size.y
 	_regenerate_mesh()
 
 func _regenerate_mesh() -> void:
 	var cm = CubeMesh.new()
-	cm.size = Vector3(width, height, width)
+	cm.size = Vector3(width, height - topperheight, width)
 	var arr = cm.get_mesh_arrays()
 	arr.resize(Mesh.ARRAY_MAX)
 	
 	var am = ArrayMesh.new()
 	am.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
 	$Mesh.mesh = am
+	
+	#Move the topper to the corect place
+	$Mesh.translation.y = -topperheight
+	$GrassTopper.translation.y = height/2 - topperheight
 	
 	# Move down so we have a fixed top
 	self.translation.y = -height/2

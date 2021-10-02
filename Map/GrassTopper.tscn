@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Graphics/UI/Cube0000.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="CubeMesh" id=1]
+material = SubResource( 2 )
+size = Vector3( 5, 1, 5 )
+
+[node name="GrassTopper" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
+mesh = SubResource( 1 )
+material/0 = null

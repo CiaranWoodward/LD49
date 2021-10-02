@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/GolemHead0000.png-1f48a5249fcdf9812f9a934429a62c7a.s3tc.stex"
-path.etc="res://.import/GolemHead0000.png-1f48a5249fcdf9812f9a934429a62c7a.etc.stex"
+path.s3tc="res://.import/Cube0000.png-0a51164e1ee1aec79660ebdc9da2b294.s3tc.stex"
+path.etc="res://.import/Cube0000.png-0a51164e1ee1aec79660ebdc9da2b294.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Graphics/UI/GolemHead0000.png"
-dest_files=[ "res://.import/GolemHead0000.png-1f48a5249fcdf9812f9a934429a62c7a.s3tc.stex", "res://.import/GolemHead0000.png-1f48a5249fcdf9812f9a934429a62c7a.etc.stex" ]
+source_file="res://Graphics/UI/Cube0000.png"
+dest_files=[ "res://.import/Cube0000.png-0a51164e1ee1aec79660ebdc9da2b294.s3tc.stex", "res://.import/Cube0000.png-0a51164e1ee1aec79660ebdc9da2b294.etc.stex" ]
 
 [params]
 

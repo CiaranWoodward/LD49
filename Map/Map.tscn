@@ -4,8 +4,14 @@
 [ext_resource path="res://Map/Map.gd" type="Script" id=2]
 
 [sub_resource type="ProceduralSky" id=1]
-ground_bottom_color = Color( 0.0117647, 0.184314, 0.137255, 1 )
-ground_curve = 0.0649805
+sky_top_color = Color( 0.662745, 0.866667, 1, 1 )
+sky_horizon_color = Color( 0.294118, 0.717647, 1, 1 )
+sky_curve = 0.527071
+ground_bottom_color = Color( 0, 0.341176, 0.521569, 1 )
+ground_horizon_color = Color( 0.294118, 0.717647, 1, 1 )
+ground_curve = 0.251068
+sun_color = Color( 0.670588, 0.843137, 0.94902, 1 )
+sun_curve = 0.282843
 
 [sub_resource type="Environment" id=2]
 background_mode = 2
@@ -47,9 +53,9 @@ script = ExtResource( 1 )
 environment = SubResource( 2 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( -0.830567, 0, -0.556919, 0, 1, 0, 0.556919, 0, -0.830567, -25.3694, 88.5735, -117.755 )
+transform = Transform( -0.830567, 0, -0.556919, 0, 1, 0, 0.556919, 0, -0.830567, -25.3694, 133.114, -81.6592 )
 light_bake_mode = 0
 shadow_enabled = true
-omni_range = 184.79
+omni_range = 300.0
 omni_shadow_mode = 0
 omni_shadow_detail = 0
