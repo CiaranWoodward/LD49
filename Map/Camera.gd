@@ -6,10 +6,10 @@ export var distance : float = 120.0
 export var MAX_SPEED = 10.0
 export var ACCEL_TIME = 0.5
 export var STOP_TIME = 0.2
-export var ZOOM_AMOUNT = 0.5
-export var ZOOM_TIME = 0.2
-export var ZOOM_MIN = 1.0
-export var ZOOM_MAX = 4.0
+export var ZOOM_AMOUNT = 20.0
+export var ZOOM_TIME = 0.1
+export var ZOOM_MIN = 0.0
+export var ZOOM_MAX = 80.0
 
 onready var tween = get_node("Tween")
 
@@ -44,10 +44,10 @@ func _unhandled_input(event):
 			Global.unhandled_input_queue.append(event)
 	if event.is_action_pressed("zoom_in"):
 		target_zoom += ZOOM_AMOUNT
-		#rezoom = true # Disabled zooming, it felt a bit janky
+		rezoom = true
 	if event.is_action_pressed("zoom_out"):
 		target_zoom -= ZOOM_AMOUNT
-		#rezoom = true
+		rezoom = true
 
 func _input(event):
 	# Once we have started dragging, always track the input
@@ -57,7 +57,7 @@ func _input(event):
 		if not event.is_pressed():
 			dragging = false
 	if dragging && event is InputEventMouseMotion:
-		angle += event.relative.x / (250.0 * zoom)
+		angle += event.relative.x / (250.0)
 		height += event.relative.y / 2.0
 		_bound_level()
 
@@ -71,9 +71,9 @@ func _bound_level():
 	if height > MAX_HEIGHT:
 		height = MAX_HEIGHT
 	
-	var camdist = distance - (distance * (zoom - ZOOM_MIN) / (ZOOM_MAX * 2))
+	var camdist = distance - zoom
 	self.translation = Vector3(cos(angle) * camdist, height, sin(angle) * camdist)
-	var lookatpoint = Vector3(cos(angle) * distance * (zoom - ZOOM_MIN) / (ZOOM_MAX * 2), 0, sin(angle) * distance * (zoom - ZOOM_MIN) / (ZOOM_MAX * 2))
+	var lookatpoint = Vector3.ZERO
 	self.look_at(lookatpoint, Vector3(0, 1, 0))
 
 func _process(delta: float) -> void:

@@ -7,6 +7,7 @@ var height = 10.0
 var verts : PoolVector3Array
 var normals : PoolVector3Array
 var colors : PoolColorArray
+var plat_height : float = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,8 +33,8 @@ func _regenerate_collision() -> void:
 
 # Displace by a value in the range [-1, 1]
 func set_displacement(displace : float):
-	self.translation.y = (displace * height) - (height/2)
-	#self.translation.y = (displace * 40.0) - (40.0/2)
+	self.plat_height = (displace * height)
+	self.translation.y = plat_height - (height/2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
