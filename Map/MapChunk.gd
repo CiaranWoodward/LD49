@@ -26,7 +26,10 @@ func _regenerate_mesh() -> void:
 	
 	# Move down so we have a fixed top
 	self.translation.y = -height/2
-	
+
+# Displace by a value in the range [-1, 1]
+func set_displacement(displace : float):
+	self.translation.y = (displace * height) - (height/2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
