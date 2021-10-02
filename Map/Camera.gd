@@ -29,14 +29,19 @@ func _ready() -> void:
 
 func _unhandled_input(event):
 	# Only allow unhandled input for start drag
-	if event is InputEventMouseButton and (event.button_index == BUTTON_RIGHT || event.button_index == BUTTON_MIDDLE):
-		if event.is_pressed():
-			dragging = true
-			tween.remove(self, "dir_vec")
-			tween.remove(self, "speed")
-			speed = 0
-			moving = false
-			dir_vec = Vector2.ZERO
+	if event is InputEventMouseButton:
+		print("button: " + str(event.button_index) + "pressed: " + str(event.pressed))
+		if (event.button_index == BUTTON_RIGHT || event.button_index == BUTTON_MIDDLE):
+			if event.is_pressed():
+				dragging = true
+				tween.remove(self, "dir_vec")
+				tween.remove(self, "speed")
+				speed = 0
+				moving = false
+				dir_vec = Vector2.ZERO
+		if (event.button_index == BUTTON_LEFT):
+			print("queued button: " + str(event.button_index) + "pressed: " + str(event.pressed))
+			Global.unhandled_input_queue.append(event)
 	if event.is_action_pressed("zoom_in"):
 		target_zoom += ZOOM_AMOUNT
 		#rezoom = true # Disabled zooming, it felt a bit janky
@@ -122,3 +127,12 @@ func _process(delta: float) -> void:
 	height += dir_vec.y * speed * 20.0 * delta
 	
 	_bound_level()
+
+func get_scenery_at_point(screenpoint = Vector2.INF):
+	if screenpoint == Vector2.INF:
+		screenpoint = get_viewport().get_mouse_position()
+	var space_state = get_world().direct_space_state
+	var from = project_ray_origin(screenpoint)
+	var to = from + project_ray_normal(screenpoint) * far
+	var colinfo = space_state.intersect_ray(from, to, [], Global.CollisionLayer.SELECTABLE_SCENERY)
+	return colinfo.get("collider")

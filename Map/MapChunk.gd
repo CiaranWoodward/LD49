@@ -1,7 +1,6 @@
-extends MeshInstance
+extends RigidBody
 
 const width = 5.0
-tool
 
 var height = 10.0
 
@@ -22,14 +21,19 @@ func _regenerate_mesh() -> void:
 	
 	var am = ArrayMesh.new()
 	am.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
-	self.mesh = am
+	$Mesh.mesh = am
 	
 	# Move down so we have a fixed top
 	self.translation.y = -height/2
+	_regenerate_collision()
+
+func _regenerate_collision() -> void:
+	$CollisionShape.shape.extents = Vector3(width/2, height/2, width/2)
 
 # Displace by a value in the range [-1, 1]
 func set_displacement(displace : float):
 	self.translation.y = (displace * height) - (height/2)
+	#self.translation.y = (displace * 40.0) - (40.0/2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:

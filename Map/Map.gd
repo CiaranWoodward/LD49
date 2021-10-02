@@ -52,6 +52,13 @@ func _gen_chunk(x : int, z : int, displaceval) -> void:
 	add_child(mc)
 	mc.set_displacement(displaceval)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func _physics_process(delta: float) -> void:
+	while len(Global.unhandled_input_queue) > 0:
+		var event = Global.unhandled_input_queue.pop_front()
+		print("unqueued button: " + str(event.button_index) + "pressed: " + str(event.pressed))
+		# TODO: Handle input
+		if (event is InputEventMouseButton) and (event.button_index == BUTTON_LEFT) and (!event.pressed):
+			var scenery = $Camera.get_scenery_at_point(event.position)
+			if is_instance_valid(scenery):
+				scenery.set_displacement(0)
+			
