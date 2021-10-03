@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Graphics/UI/GolemHead0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/UI/White0000.png" type="Texture" id=2]
@@ -10,6 +10,15 @@
 [ext_resource path="res://Graphics/UI/Icons/Melee0000.png" type="Texture" id=8]
 [ext_resource path="res://UI/SkillPopUp.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Graphics/UI/Frame0000.png" type="Texture" id=10]
+[ext_resource path="res://Graphics/UI/Icons/RangedHover0000.png" type="Texture" id=11]
+[ext_resource path="res://Graphics/UI/Icons/Ranged0000.png" type="Texture" id=12]
+[ext_resource path="res://Graphics/UI/Icons/MoveHover0000.png" type="Texture" id=13]
+[ext_resource path="res://Graphics/UI/Icons/Move0000.png" type="Texture" id=14]
+[ext_resource path="res://Graphics/UI/Icons/RaiseSelected0000.png" type="Texture" id=15]
+[ext_resource path="res://Graphics/UI/Icons/CraterSelected0000.png" type="Texture" id=16]
+[ext_resource path="res://Graphics/UI/Icons/MeleeSelected0000.png" type="Texture" id=17]
+[ext_resource path="res://Graphics/UI/Icons/RangeSelected0000.png" type="Texture" id=18]
+[ext_resource path="res://Graphics/UI/Icons/MoveSelected0000.png" type="Texture" id=19]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -70,27 +79,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Crater" type="TextureButton" parent="Control/ActionBar"]
+[node name="Move" type="TextureButton" parent="Control/ActionBar"]
+margin_left = 292.0
+margin_right = 372.0
+margin_bottom = 80.0
+toggle_mode = true
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 19 )
+texture_hover = ExtResource( 13 )
+
+[node name="Melee" type="TextureButton" parent="Control/ActionBar"]
 margin_left = 382.0
 margin_right = 462.0
 margin_bottom = 80.0
-action_mode = 0
-texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
+toggle_mode = true
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 7 )
 
-[node name="Raise" type="TextureButton" parent="Control/ActionBar"]
+[node name="Ranged" type="TextureButton" parent="Control/ActionBar"]
 margin_left = 472.0
 margin_right = 552.0
 margin_bottom = 80.0
-texture_normal = ExtResource( 6 )
-texture_hover = ExtResource( 5 )
+toggle_mode = true
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 18 )
+texture_hover = ExtResource( 11 )
 
-[node name="Melee" type="TextureButton" parent="Control/ActionBar"]
+[node name="Raise" type="TextureButton" parent="Control/ActionBar"]
 margin_left = 562.0
 margin_right = 642.0
 margin_bottom = 80.0
-texture_normal = ExtResource( 8 )
-texture_hover = ExtResource( 7 )
+toggle_mode = true
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 15 )
+texture_hover = ExtResource( 5 )
+
+[node name="Crater" type="TextureButton" parent="Control/ActionBar"]
+margin_left = 652.0
+margin_right = 732.0
+margin_bottom = 80.0
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 4 )
 
 [node name="CrystalStability" type="TextureProgress" parent="Control"]
 anchor_left = 1.0
@@ -105,6 +138,7 @@ texture_progress = ExtResource( 2 )
 nine_patch_stretch = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -129,7 +163,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -283.89
-margin_top = -223.119
-margin_right = -45.8899
-margin_bottom = -26.119
+margin_left = -229.89
+margin_top = -143.0
+margin_right = -29.89
+margin_bottom = -10.0
+rect_min_size = Vector2( 200, 133 )
