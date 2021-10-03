@@ -6,6 +6,14 @@ enum CollisionLayer {
 	SELECTABLE_SCENERY = 1<<10
 }
 
+enum SkillType {
+	None, Crater, Raise, Ranged, Melee, MoveMelee, MoveRanged
+}
+
+enum GameState {
+	PlayerTurn, EnemyTurn, MapTurn
+}
+
 var unhandled_input_queue = []
 
 # Called when the node enters the scene tree for the first time.
