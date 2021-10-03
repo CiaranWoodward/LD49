@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Map/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Map/Map.gd" type="Script" id=2]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=3]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.662745, 0.866667, 1, 1 )
@@ -67,3 +68,5 @@ shadow_enabled = true
 omni_range = 200.0
 omni_shadow_mode = 0
 omni_shadow_detail = 0
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
