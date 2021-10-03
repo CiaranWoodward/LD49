@@ -19,6 +19,8 @@ enum GameState {
 	PlayerTurn, EnemyTurn, MapTurn
 }
 
+enum GolemType { Melee, Ranged }
+
 var unhandled_input_queue = []
 var map = null
 var hud = null

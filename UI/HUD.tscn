@@ -96,7 +96,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Move" type="TextureButton" parent="root/ActionBar"]
+[node name="MoveRanged" type="TextureButton" parent="root/ActionBar"]
+margin_right = 80.0
+margin_bottom = 80.0
+toggle_mode = true
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 19 )
+texture_hover = ExtResource( 13 )
+
+[node name="MoveMelee" type="TextureButton" parent="root/ActionBar"]
 margin_right = 80.0
 margin_bottom = 80.0
 toggle_mode = true
