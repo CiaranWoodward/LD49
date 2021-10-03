@@ -74,9 +74,15 @@ func _generate_navmesh() -> void:
 			for n in neighbors:
 				_handle_navmesh_connection(curnode, n)
 
+func _get_heightdiff(from, to) -> float:
+	return to.plat_height - from.plat_height
+
+func _is_heightdiff_movable(from, to) -> bool:
+	var heightdiff = _get_heightdiff(from, to)
+	return ((heightdiff < max_climbheight) && (heightdiff > -max_fallheight))
+
 func _handle_navmesh_connection(from, to) -> void:
-	var heightdiff = to.plat_height - from.plat_height
-	if (heightdiff < max_climbheight) && (heightdiff > -max_fallheight):
+	if _is_heightdiff_movable(from, to):
 		astarmap.connect_points(from.id, to.id, false)
 
 func get_neighbor_chunks(x: int, z: int):
