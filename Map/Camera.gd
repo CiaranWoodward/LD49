@@ -28,6 +28,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _unhandled_input(event):
+	Global.unhandled_input_queue.append(event)
 	# Only allow unhandled input for start drag
 	if event is InputEventMouseButton:
 		print("button: " + str(event.button_index) + "pressed: " + str(event.pressed))
@@ -39,9 +40,6 @@ func _unhandled_input(event):
 				speed = 0
 				moving = false
 				dir_vec = Vector2.ZERO
-		if (event.button_index == BUTTON_LEFT):
-			print("queued button: " + str(event.button_index) + "pressed: " + str(event.pressed))
-			Global.unhandled_input_queue.append(event)
 	if event.is_action_pressed("zoom_in"):
 		target_zoom += ZOOM_AMOUNT
 		rezoom = true

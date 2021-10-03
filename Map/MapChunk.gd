@@ -59,6 +59,9 @@ func get_platform_pos() -> Vector3:
 	retval.y += height/2
 	return retval
 
+func set_selected(selected : bool):
+	$"GrassTopper/Selected".visible = selected
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #	pass

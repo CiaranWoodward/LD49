@@ -120,14 +120,12 @@ func _regen_chunk(x : int, z : int, displaceval) -> void:
 		mc.set_displacement(displaceval)
 
 var othernode = null
+var prevselected = null
 func _physics_process(delta: float) -> void:
 	while len(Global.unhandled_input_queue) > 0:
 		var event = Global.unhandled_input_queue.pop_front()
-		print("unqueued button: " + str(event.button_index) + "pressed: " + str(event.pressed))
 		# TODO: Handle input
 		if (event is InputEventMouseButton) and (event.button_index == BUTTON_LEFT) and (!event.pressed):
-			_regen_map()
-			return
 			var scenery = $Camera.get_scenery_at_point(event.position)
 			if is_instance_valid(scenery):
 				if !is_instance_valid(othernode):
@@ -137,6 +135,12 @@ func _physics_process(delta: float) -> void:
 					var pp = astarmap.get_id_path(othernode.id, scenery.id)
 					var list = []
 					for id in pp:
-						list.append(id2chunk[id].get_platform_pos())
+						list.append(id2chunk[id].get_platform_pos() + Vector3(0, 1, 0))
 					$LineRenderer.points = list
 					othernode = null
+		if (event is InputEventMouseMotion):
+			if is_instance_valid(prevselected):
+				prevselected.set_selected(false)
+			prevselected = $Camera.get_scenery_at_point(event.position)
+			if is_instance_valid(prevselected):
+				prevselected.set_selected(true)
