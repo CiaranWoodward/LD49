@@ -29,9 +29,7 @@ func _regenerate_mesh() -> void:
 	am.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arr)
 	$Mesh.mesh = am
 	
-	#Move the topper to the corect place
-	$Mesh.translation.y = -topperheight/2
-	$GrassTopper.translation.y = height/2 - topperheight/2
+	_set_visual_relative_height(self.plat_height)
 	
 	# Move down so we have a fixed top
 	self.translation.y = -height/2
@@ -40,10 +38,21 @@ func _regenerate_mesh() -> void:
 func _regenerate_collision() -> void:
 	$CollisionShape.shape.extents = Vector3(width/2, height/2, width/2)
 
+func _set_visual_relative_height(rel_height):
+	#Move the topper to the correct place
+	$Mesh.translation.y = -topperheight/2 + rel_height
+	$GrassTopper.translation.y = height/2 - topperheight/2 + rel_height
+
 # Displace by a value in the range [-1, 1]
-func set_displacement(displace : float):
+func set_displacement(displace : float, tweentime : float = 1.5):
+	var old_plat_height = self.plat_height
 	self.plat_height = (displace * height)
+	var plat_height_diff = old_plat_height - plat_height
 	self.translation.y = plat_height - (height/2)
+	tweentime *= rand_range(0.9, 1.1)
+	_set_visual_relative_height(plat_height_diff)
+	$Tween.interpolate_method(self, "_set_visual_relative_height", plat_height_diff, 0, tweentime, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+	$Tween.start()
 
 func get_platform_pos() -> Vector3:
 	var retval = self.translation

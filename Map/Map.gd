@@ -30,6 +30,18 @@ func _ready() -> void:
 	_initial_mapgen()
 	_generate_navmesh()
 
+func _regen_map() -> void:
+	var noise = OpenSimplexNoise.new()
+	noise.seed = randi()
+	noise.octaves = octaves
+	noise.period = period
+	noise.persistence = persistance
+	
+	for x in range(-radius, radius+1):
+		for z in range(-radius, radius+1):
+			_regen_chunk(x, z, noise.get_noise_2d(x, z))
+	_generate_navmesh()
+
 func _initial_mapgen() -> void:
 	var noise = OpenSimplexNoise.new()
 	noise.seed = randi()
@@ -102,6 +114,11 @@ func _gen_chunk(x : int, z : int, displaceval) -> void:
 	id2chunk[id_count] = mc
 	id_count += 1
 
+func _regen_chunk(x : int, z : int, displaceval) -> void:
+	var mc = get_chunk(x, z)
+	if is_instance_valid(mc):
+		mc.set_displacement(displaceval)
+
 var othernode = null
 func _physics_process(delta: float) -> void:
 	while len(Global.unhandled_input_queue) > 0:
@@ -109,6 +126,8 @@ func _physics_process(delta: float) -> void:
 		print("unqueued button: " + str(event.button_index) + "pressed: " + str(event.pressed))
 		# TODO: Handle input
 		if (event is InputEventMouseButton) and (event.button_index == BUTTON_LEFT) and (!event.pressed):
+			_regen_map()
+			return
 			var scenery = $Camera.get_scenery_at_point(event.position)
 			if is_instance_valid(scenery):
 				if !is_instance_valid(othernode):
@@ -121,4 +140,3 @@ func _physics_process(delta: float) -> void:
 						list.append(id2chunk[id].get_platform_pos())
 					$LineRenderer.points = list
 					othernode = null
-			
