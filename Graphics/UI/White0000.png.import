@@ -2,33 +2,35 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/White0000.png-55c3981acaf6f6f3ad1a6c22ce3557b7.stex"
+path.s3tc="res://.import/White0000.png-55c3981acaf6f6f3ad1a6c22ce3557b7.s3tc.stex"
+path.etc="res://.import/White0000.png-55c3981acaf6f6f3ad1a6c22ce3557b7.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Graphics/UI/White0000.png"
-dest_files=[ "res://.import/White0000.png-55c3981acaf6f6f3ad1a6c22ce3557b7.stex" ]
+dest_files=[ "res://.import/White0000.png-55c3981acaf6f6f3ad1a6c22ce3557b7.s3tc.stex", "res://.import/White0000.png-55c3981acaf6f6f3ad1a6c22ce3557b7.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=true
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
