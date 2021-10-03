@@ -46,4 +46,7 @@ func _ready():
 	# Retrieve the texture and set it to the viewport quad.
 	var tex =  viewport.get_texture()
 	
+	$ViewportQuad.material_override = SpatialMaterial.new()
+	$ViewportQuad.material_override.flags_transparent = true
+	$ViewportQuad.material_override.params_billboard_mode = SpatialMaterial.BILLBOARD_ENABLED
 	$ViewportQuad.material_override.albedo_texture = tex
