@@ -47,6 +47,8 @@ glow_enabled = true
 script = ExtResource( 2 )
 period = 10.0
 
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.919561, 0.392947, 0, -0.392947, 0.919561, -2.81675, 25.7026, 101.771 )
 current = true
@@ -74,8 +76,6 @@ shadow_enabled = true
 omni_range = 200.0
 omni_shadow_mode = 0
 omni_shadow_detail = 0
-
-[node name="HUD" parent="." instance=ExtResource( 3 )]
 
 [node name="RangedGolem" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21105, 11.6187, 57.5135 )
