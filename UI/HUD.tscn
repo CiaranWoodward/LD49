@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://Graphics/UI/GolemHead0000.png" type="Texture" id=1]
+[ext_resource path="res://UI/PlayerStats.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Graphics/UI/White0000.png" type="Texture" id=2]
 [ext_resource path="res://Graphics/UI/Icons/Crater0000.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/UI/Icons/CraterHover0000.png" type="Texture" id=4]
@@ -23,7 +23,8 @@
 [node name="HUD" type="CanvasLayer"]
 
 [node name="Control" type="Control" parent="."]
-anchor_right = 1.0
+anchor_left = -0.00130355
+anchor_right = 0.998696
 anchor_bottom = 1.0
 mouse_filter = 2
 __meta__ = {
@@ -33,46 +34,53 @@ __meta__ = {
 [node name="PlayerIcons" type="VBoxContainer" parent="Control"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 75.0
-margin_bottom = 60.0
+margin_right = 150.0
+margin_bottom = 100.0
 custom_constants/separation = 40
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player1" type="TextureButton" parent="Control/PlayerIcons"]
-margin_right = 65.0
-margin_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-size_flags_stretch_ratio = 0.5
-texture_normal = ExtResource( 1 )
-stretch_mode = 5
+[node name="PlayerStats" parent="Control/PlayerIcons" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_right = 150.0
+margin_bottom = 100.0
 
-[node name="Health" type="TextureProgress" parent="Control/PlayerIcons/Player1"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 8.0
-texture_under = ExtResource( 2 )
-texture_over = ExtResource( 2 )
-texture_progress = ExtResource( 2 )
-tint_under = Color( 0, 0, 0, 1 )
-tint_over = Color( 1, 1, 1, 0 )
-tint_progress = Color( 0.0941176, 0.576471, 0.168627, 1 )
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PlayerStats2" parent="Control/PlayerIcons" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 140.0
+margin_right = 150.0
+margin_bottom = 240.0
+
+[node name="PlayerStats3" parent="Control/PlayerIcons" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 280.0
+margin_right = 150.0
+margin_bottom = 380.0
+
+[node name="PlayerStats4" parent="Control/PlayerIcons" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 420.0
+margin_right = 150.0
+margin_bottom = 520.0
 
 [node name="ActionBar" type="HBoxContainer" parent="Control"]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_top = -90.4882
-margin_bottom = -10.4882
+margin_left = -220.0
+margin_top = -90.0
+margin_right = 220.0
+margin_bottom = -10.0
 custom_constants/separation = 10
 alignment = 1
 __meta__ = {
@@ -80,8 +88,7 @@ __meta__ = {
 }
 
 [node name="Move" type="TextureButton" parent="Control/ActionBar"]
-margin_left = 292.0
-margin_right = 372.0
+margin_right = 80.0
 margin_bottom = 80.0
 toggle_mode = true
 texture_normal = ExtResource( 14 )
@@ -89,8 +96,8 @@ texture_pressed = ExtResource( 19 )
 texture_hover = ExtResource( 13 )
 
 [node name="Melee" type="TextureButton" parent="Control/ActionBar"]
-margin_left = 382.0
-margin_right = 462.0
+margin_left = 90.0
+margin_right = 170.0
 margin_bottom = 80.0
 toggle_mode = true
 texture_normal = ExtResource( 8 )
@@ -98,8 +105,8 @@ texture_pressed = ExtResource( 17 )
 texture_hover = ExtResource( 7 )
 
 [node name="Ranged" type="TextureButton" parent="Control/ActionBar"]
-margin_left = 472.0
-margin_right = 552.0
+margin_left = 180.0
+margin_right = 260.0
 margin_bottom = 80.0
 toggle_mode = true
 texture_normal = ExtResource( 12 )
@@ -107,8 +114,8 @@ texture_pressed = ExtResource( 18 )
 texture_hover = ExtResource( 11 )
 
 [node name="Raise" type="TextureButton" parent="Control/ActionBar"]
-margin_left = 562.0
-margin_right = 642.0
+margin_left = 270.0
+margin_right = 350.0
 margin_bottom = 80.0
 toggle_mode = true
 texture_normal = ExtResource( 6 )
@@ -116,8 +123,8 @@ texture_pressed = ExtResource( 15 )
 texture_hover = ExtResource( 5 )
 
 [node name="Crater" type="TextureButton" parent="Control/ActionBar"]
-margin_left = 652.0
-margin_right = 732.0
+margin_left = 360.0
+margin_right = 440.0
 margin_bottom = 80.0
 toggle_mode = true
 action_mode = 0
@@ -128,25 +135,25 @@ texture_hover = ExtResource( 4 )
 [node name="CrystalStability" type="TextureProgress" parent="Control"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -210.0
+margin_left = -110.0
 margin_top = 10.0
 margin_right = -10.0
-margin_bottom = 79.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 100, 50 )
 texture_under = ExtResource( 2 )
 texture_over = ExtResource( 10 )
 texture_progress = ExtResource( 2 )
 nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control"]
 visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -292.355
-margin_top = -221.885
-margin_right = -37.3549
-margin_bottom = -21.8852
+margin_left = 731.645
+margin_top = 378.115
+margin_right = 1171.65
+margin_bottom = 511.115
 rect_min_size = Vector2( 200, 100 )
 texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 500, 400 )
@@ -159,12 +166,7 @@ __meta__ = {
 }
 
 [node name="SkillPopUp" parent="Control" instance=ExtResource( 9 )]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -229.89
-margin_top = -143.0
-margin_right = -29.89
-margin_bottom = -10.0
-rect_min_size = Vector2( 200, 133 )
+margin_left = 794.11
+margin_top = 457.0
+margin_right = 994.11
+margin_bottom = 577.0

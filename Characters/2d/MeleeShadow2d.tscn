@@ -1,10 +1,19 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Graphics/MeleeShadow/LeftArm0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/MeleeShadow/Smear0000.png" type="Texture" id=2]
 [ext_resource path="res://Graphics/MeleeShadow/Head0000.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/MeleeShadow/RightArm0000.png" type="Texture" id=4]
 [ext_resource path="res://Graphics/MeleeShadow/Body0000.png" type="Texture" id=5]
+[ext_resource path="res://Helper/ViewportCamera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Graphics/UI/SmokeParticle0000.png" type="Texture" id=7]
+
+[sub_resource type="Curve" id=27]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.997093, 0.709091 ), -0.47589, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=26]
+offsets = PoolRealArray( 0.224299, 0.993769, 1 )
+colors = PoolColorArray( 0.160784, 0.160784, 0.160784, 1, 0.282353, 0.282353, 0.282353, 0, 0.282353, 0.282353, 0.282353, 0.141066 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "BackAttack"
@@ -905,16 +914,15 @@ node_connections = [ "output", 0, "StateMachine" ]
 [sub_resource type="AnimationNodeStateMachinePlayback" id=25]
 
 [node name="MeleeGolem2d" type="Node2D"]
-position = Vector2( 157.322, 400.048 )
 
 [node name="Position2D" type="Position2D" parent="."]
 
 [node name="Head" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -199.905 )
+position = Vector2( 0, -205 )
 texture = ExtResource( 3 )
 
 [node name="Arms" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -190.148 )
+position = Vector2( 0, -200 )
 
 [node name="LeftArm" type="Sprite" parent="Position2D/Arms"]
 position = Vector2( -55, -55 )
@@ -929,7 +937,7 @@ texture = ExtResource( 4 )
 offset = Vector2( -59.4508, 36.6874 )
 
 [node name="Body" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -206.781 )
+position = Vector2( 0, -205 )
 texture = ExtResource( 5 )
 
 [node name="Smear" type="Sprite" parent="Position2D"]
@@ -939,6 +947,30 @@ rotation = -0.255331
 scale = Vector2( 1.33415, 1.64962 )
 z_index = 10
 texture = ExtResource( 2 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Position2D"]
+position = Vector2( 0, -207.655 )
+z_index = 5
+emitting = false
+amount = 20
+lifetime = 4.0
+explosiveness = 0.9
+lifetime_randomness = 0.5
+texture = ExtResource( 7 )
+emission_shape = 2
+emission_rect_extents = Vector2( 80, 120 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 30.0
+angular_velocity = 30.0
+angular_velocity_random = 0.5
+linear_accel = 50.0
+linear_accel_random = 1.0
+tangential_accel = 10.0
+damping = 30.0
+scale_amount_random = 0.5
+scale_amount_curve = SubResource( 27 )
+color_ramp = SubResource( 26 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -955,3 +987,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/StateMachine/playback = SubResource( 25 )
 parameters/StateMachine/Walk/TimeScale/scale = 3.0
+
+[node name="ViewportCamera" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, -241.558 )
+bounds = Vector2( 600, 600 )
