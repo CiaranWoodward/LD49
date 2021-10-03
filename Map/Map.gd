@@ -138,7 +138,7 @@ func _regen_chunk(x : int, z : int, displaceval) -> void:
 	var mc = get_chunk(x, z)
 	if is_instance_valid(mc):
 		mc.set_displacement(displaceval)
-
+	
 var othernode = null
 var prevselected = null
 func _physics_process(delta: float) -> void:
@@ -164,3 +164,5 @@ func _physics_process(delta: float) -> void:
 			prevselected = $Camera.get_scenery_at_point(event.position)
 			if is_instance_valid(prevselected):
 				prevselected.set_selected(true)
+		if event.is_action_pressed("ui_cancel"):
+			Global.selected_player = null

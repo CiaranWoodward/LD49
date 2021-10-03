@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Graphics/UI/GolemHead0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/UI/GreenFrame0000.png" type="Texture" id=2]
 [ext_resource path="res://Graphics/UI/RedFrame0000.png" type="Texture" id=3]
 [ext_resource path="res://UI/Ubuntu-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://UI/PlayerStats.gd" type="Script" id=5]
+[ext_resource path="res://Graphics/UI/Frame0000.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
@@ -21,7 +22,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Border" type="NinePatchRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Image" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -53.5
@@ -92,3 +102,5 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

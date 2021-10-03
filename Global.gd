@@ -4,6 +4,7 @@ extends Node
 signal player_selected(id, player)
 signal skill_selected(id)
 signal gamestate_changed(newstate)
+signal players_modified()
 
 enum CollisionLayer {
 	SCENERY = 1<<0,
@@ -42,3 +43,7 @@ func _set_selected_skill(new):
 func _set_gamestate(new):
 	current_gamestate = new
 	emit_signal("gamestate_changed", new)
+
+func add_player(new_player):
+	players.append(new_player)
+	emit_signal("players_modified")
