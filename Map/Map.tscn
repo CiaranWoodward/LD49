@@ -78,6 +78,6 @@ omni_shadow_detail = 0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.21105, 11.6187, 57.5135 )
 
 [node name="MeleeGolem" parent="." instance=ExtResource( 5 )]
-transform = Transform( 0.999741, 0.0227397, 0, -0.0227397, 0.999741, 0, 0, 0, 1, 55.3205, -0.042367, 44.3089 )
+transform = Transform( 0.999741, 0.0227397, 0, -0.0227397, 0.999741, 0, 0, 0, 1, 55.3205, 1.52538, 44.3089 )
 
 [node name="LineRenderer" parent="." instance=ExtResource( 4 )]

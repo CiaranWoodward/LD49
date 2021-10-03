@@ -10,6 +10,7 @@ var normals : PoolVector3Array
 var colors : PoolColorArray
 var plat_height : float = 0
 var topperheight : float = 1
+var visual_height_offset : float = 0
 
 # For the A* algorithm tracking
 var id = 0
@@ -40,6 +41,7 @@ func _regenerate_collision() -> void:
 
 func _set_visual_relative_height(rel_height):
 	#Move the topper to the correct place
+	visual_height_offset = rel_height
 	$Mesh.translation.y = -topperheight/2 + rel_height
 	$GrassTopper.translation.y = height/2 - topperheight/2 + rel_height
 
@@ -57,6 +59,11 @@ func set_displacement(displace : float, tweentime : float = 1.5):
 func get_platform_pos() -> Vector3:
 	var retval = self.translation
 	retval.y += height/2
+	return retval
+
+func get_platform_visual_pos() -> Vector3:
+	var retval = get_platform_pos()
+	retval.y += self.visual_height_offset
 	return retval
 
 func set_selected(selected : bool):

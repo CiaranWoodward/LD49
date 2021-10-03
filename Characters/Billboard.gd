@@ -7,6 +7,7 @@ export(PackedScene) var scene : PackedScene = null
 func set_output_size(new):
 	output_size = new
 	$ViewportQuad.mesh.size = new
+	$ShadowCaster.mesh.mid_height = new.y/2
 
 func set_scene(new):
 	scene = new
@@ -48,5 +49,6 @@ func _ready():
 	
 	$ViewportQuad.material_override = SpatialMaterial.new()
 	$ViewportQuad.material_override.flags_transparent = true
+	$ViewportQuad.material_override.flags_do_not_receive_shadows = true
 	$ViewportQuad.material_override.params_billboard_mode = SpatialMaterial.BILLBOARD_ENABLED
 	$ViewportQuad.material_override.albedo_texture = tex

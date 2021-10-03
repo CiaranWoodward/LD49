@@ -20,6 +20,8 @@ export var max_climbheight : float = 5.0
 # Map array
 var maparr = []
 var id2chunk = {}
+var mapset = []
+var mapedgeset = []
 var id_count = 0
 var astarmap : AStar
 
@@ -29,6 +31,7 @@ func _ready() -> void:
 	astarmap = AStar.new()
 	_initial_mapgen()
 	_generate_navmesh()
+	Global.map = self
 
 func _regen_map() -> void:
 	var noise = OpenSimplexNoise.new()
@@ -106,6 +109,14 @@ func get_chunk(x : int, z : int):
 		return null
 	return maparr[x][z]
 
+func get_random_chunk():
+	var i = randi() % len(mapset)
+	return mapset[i]
+
+func get_random_edge_chunk():
+	var i = randi() % len(mapedgeset)
+	return mapedgeset[i]
+
 func _gen_chunk(x : int, z : int, displaceval) -> void:
 	var dist = sqrt(x*x + z*z)
 	if dist > radius:
@@ -117,7 +128,10 @@ func _gen_chunk(x : int, z : int, displaceval) -> void:
 	add_child(mc)
 	mc.set_displacement(displaceval)
 	mc.id = id_count
+	if dist > (radius - 1):
+		mapedgeset.append(mc)
 	id2chunk[id_count] = mc
+	mapset.append(mc)
 	id_count += 1
 
 func _regen_chunk(x : int, z : int, displaceval) -> void:

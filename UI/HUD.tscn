@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://UI/PlayerStats.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Graphics/UI/White0000.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Graphics/UI/Icons/MeleeSelected0000.png" type="Texture" id=17]
 [ext_resource path="res://Graphics/UI/Icons/RangeSelected0000.png" type="Texture" id=18]
 [ext_resource path="res://Graphics/UI/Icons/MoveSelected0000.png" type="Texture" id=19]
+[ext_resource path="res://UI/ActionBar.gd" type="Script" id=20]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -83,6 +84,7 @@ margin_right = 220.0
 margin_bottom = -10.0
 custom_constants/separation = 10
 alignment = 1
+script = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -166,7 +168,12 @@ __meta__ = {
 }
 
 [node name="SkillPopUp" parent="Control" instance=ExtResource( 9 )]
-margin_left = 794.11
-margin_top = 457.0
-margin_right = 994.11
-margin_bottom = 577.0
+visible = true
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -210.488
+margin_top = -143.973
+margin_right = -10.4882
+margin_bottom = -23.9729
