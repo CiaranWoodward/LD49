@@ -9,11 +9,10 @@ var verts : PoolVector3Array
 var normals : PoolVector3Array
 var colors : PoolColorArray
 var plat_height : float = 0
-var topperheight : float = 
+var topperheight : float = 1
 
 # For the A* algorithm tracking
 var id = 0
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,6 +44,11 @@ func _regenerate_collision() -> void:
 func set_displacement(displace : float):
 	self.plat_height = (displace * height)
 	self.translation.y = plat_height - (height/2)
+
+func get_platform_pos() -> Vector3:
+	var retval = self.translation
+	retval.y += height/2
+	return retval
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:

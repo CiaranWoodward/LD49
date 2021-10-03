@@ -14,8 +14,8 @@ export var period : float = 20.0
 export var persistance : float = 0.1
 
 # Movement parameters
-export var max_fallheight : float = 15.0
-export var max_climbheight : float = 10.0
+export var max_fallheight : float = 10.0
+export var max_climbheight : float = 5.0
 
 # Map array
 var maparr = []
@@ -28,6 +28,7 @@ func _ready() -> void:
 	randomize()
 	astarmap = AStar.new()
 	_initial_mapgen()
+	_generate_navmesh()
 
 func _initial_mapgen() -> void:
 	var noise = OpenSimplexNoise.new()
@@ -46,33 +47,46 @@ func _initial_mapgen() -> void:
 
 func _generate_navmesh() -> void:
 	astarmap.clear()
-	for x in range(len(maparr)):
-		for z in range(len(maparr[x])):
+	for x in range(-radius, radius+1):
+		for z in range(-radius, radius+1):
 			var curnode = get_chunk(x, z)
 			if !is_instance_valid(curnode):
 				continue
-			#astarmap.add_point(curnode.id)
+			astarmap.add_point(curnode.id, curnode.get_platform_pos())
+	for x in range(-radius, radius+1):
+		for z in range(-radius, radius+1):
+			var curnode = get_chunk(x, z)
+			if !is_instance_valid(curnode):
+				continue
 			var neighbors = get_neighbor_chunks(x, z)
 			for n in neighbors:
 				_handle_navmesh_connection(curnode, n)
 
 func _handle_navmesh_connection(from, to) -> void:
 	var heightdiff = to.plat_height - from.plat_height
-	if heightdiff > max_climbheight && -heightdiff > max_fallheight:
-		
+	if (heightdiff < max_climbheight) && (heightdiff > -max_fallheight):
+		astarmap.connect_points(from.id, to.id, false)
 
 func get_neighbor_chunks(x: int, z: int):
 	var rval = []
 	for xi in [1, -1]:
-		for zi in [1, -1]:
-			var curnode = get_chunk(x + xi, z + zi)
-			if is_instance_valid(curnode):
-				rval.append(curnode)
+		var zi = 0
+		var curnode = get_chunk(x + xi, z + zi)
+		if is_instance_valid(curnode):
+			rval.append(curnode)
+	for zi in [1, -1]:
+		var xi = 0
+		var curnode = get_chunk(x + xi, z + zi)
+		if is_instance_valid(curnode):
+			rval.append(curnode)
+	return rval
 
 func get_chunk(x : int, z : int):
-	if abs(x * z) > (radius * radius):
+	x = x + radius
+	z = z + radius
+	if x < 0 or z < 0 or x >= len(maparr) or z >= len(maparr[x]):
 		return null
-	return maparr[x + radius][z + radius]
+	return maparr[x][z]
 
 func _gen_chunk(x : int, z : int, displaceval) -> void:
 	var dist = sqrt(x*x + z*z)
@@ -88,6 +102,7 @@ func _gen_chunk(x : int, z : int, displaceval) -> void:
 	id2chunk[id_count] = mc
 	id_count += 1
 
+var othernode = null
 func _physics_process(delta: float) -> void:
 	while len(Global.unhandled_input_queue) > 0:
 		var event = Global.unhandled_input_queue.pop_front()
@@ -96,5 +111,14 @@ func _physics_process(delta: float) -> void:
 		if (event is InputEventMouseButton) and (event.button_index == BUTTON_LEFT) and (!event.pressed):
 			var scenery = $Camera.get_scenery_at_point(event.position)
 			if is_instance_valid(scenery):
-				scenery.set_displacement(0)
+				if !is_instance_valid(othernode):
+					othernode = scenery
+				else:
+					print(astarmap.get_point_connections(othernode.id))
+					var pp = astarmap.get_id_path(othernode.id, scenery.id)
+					var list = []
+					for id in pp:
+						list.append(id2chunk[id].get_platform_pos())
+					$LineRenderer.points = list
+					othernode = null
 			
