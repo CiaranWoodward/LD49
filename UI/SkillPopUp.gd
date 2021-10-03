@@ -1,4 +1,4 @@
-extends Popup
+extends Control
 
 
 # Declare member variables here. Examples:
@@ -16,7 +16,7 @@ func showtype(showtype):
 	if showtype == Global.SkillType.None:
 		self.visible = false
 		return
-	self.popup()
+	self.visible = true
 	match showtype:
 		Global.SkillType.Crater:
 			$NinePatchRect/MarginContainer/Crater.visible = true

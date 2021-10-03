@@ -15,9 +15,7 @@ func _ready() -> void:
 		child.connect("mouse_exited", self, "_mouse_exited", [child.name])
 
 func _mouse_entered(item):
-	get_parent().get_node("SkillPopUp").showtype(namemap[item])
-	print("enter " + item)
+	Global.hud.get_node("root/SkillPopUp").showtype(namemap[item])
 
 func _mouse_exited(item):
-	get_parent().get_node("SkillPopUp").showtype(Global.SkillType.None)
-	print("exit " + item)
+	Global.hud.get_node("root/SkillPopUp").showtype(Global.SkillType.None)
