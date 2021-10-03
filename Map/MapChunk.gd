@@ -10,6 +10,9 @@ var normals : PoolVector3Array
 var colors : PoolColorArray
 var plat_height : float = 0
 
+# For the A* algorithm tracking
+var id = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

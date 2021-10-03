@@ -27,6 +27,7 @@ ao_on_uv2 = false
 ao_texture_channel = 0
 
 [node name="MapChunk" type="RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0 )
 collision_layer = 1025
 mode = 3
 script = ExtResource( 1 )
