@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Map/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Map/Map.gd" type="Script" id=2]
 [ext_resource path="res://LineRenderer/LineRenderer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://line.png" type="Texture" id=4]
+[ext_resource path="res://Characters/MeleeGolem.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.662745, 0.866667, 1, 1 )
@@ -79,3 +80,6 @@ cast_shadow = 0
 points = [ Vector3( 0, 0, 0 ), Vector3( 0, 7, 0 ) ]
 startThickness = 1.0
 endThickness = 1.0
+
+[node name="MeleeGolem" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.5865, 8.09474, 49.4842 )

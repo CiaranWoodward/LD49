@@ -1,17 +1,49 @@
 tool
 extends Spatial
 
+export(Vector2) var output_size = Vector2(5, 5) setget set_output_size
+export(PackedScene) var scene : PackedScene = null
+
+func set_output_size(new):
+	output_size = new
+	$ViewportQuad.mesh.size = new
+
+func set_scene(new):
+	scene = new
+	_clear_viewport_children()
+	if !is_instance_valid(scene):
+		print("Error: No billboard scene configured")
+		return
+	# Configure the output size and viewport
+	var childscene = scene.instance()
+	var scenecontents = childscene.get_children()
+	var found = false
+	for ch in scenecontents:
+		if ch.has_method("get_viewport_camera_bounds"):
+			$Viewport.size = ch.get_viewport_camera_bounds()
+			found = true
+			break
+	if !found:
+		print("Error: No viewport camera in billboard scene")
+	# Add the scene to viewport
+	$Viewport.add_child(childscene)
+	print("added viewport child scene")
+	if Engine.editor_hint:
+		childscene.owner = get_tree().edited_scene_root
+
+func _clear_viewport_children():
+	for ch in $Viewport.get_children():
+		ch.queue_free()
+
 func _ready():
+	set_output_size(output_size)
+	set_scene(scene)
+	
 	# Clear the viewport.
 	var viewport = $Viewport
 	$Viewport.set_clear_mode(Viewport.CLEAR_MODE_ALWAYS)
-
-	# Let two frames pass to make sure the vieport is captured.
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
 
 	# Retrieve the texture and set it to the viewport quad.
 	var tex =  viewport.get_texture()
 	
 	$ViewportQuad.material_override.albedo_texture = tex
-

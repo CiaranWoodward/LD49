@@ -30,8 +30,8 @@ func _regenerate_mesh() -> void:
 	$Mesh.mesh = am
 	
 	#Move the topper to the corect place
-	$Mesh.translation.y = -topperheight
-	$GrassTopper.translation.y = height/2 - topperheight
+	$Mesh.translation.y = -topperheight/2
+	$GrassTopper.translation.y = height/2 - topperheight/2
 	
 	# Move down so we have a fixed top
 	self.translation.y = -height/2
