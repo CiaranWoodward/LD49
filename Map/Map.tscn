@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Map/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Map/Map.gd" type="Script" id=2]
-[ext_resource path="res://LineRenderer/LineRenderer.tscn" type="PackedScene" id=3]
-[ext_resource path="res://line.png" type="Texture" id=4]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/MeleeGolem.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ProceduralSky" id=1]
@@ -39,9 +38,6 @@ dof_blur_near_distance = 12.29
 dof_blur_near_transition = 2.88
 glow_enabled = true
 
-[sub_resource type="SpatialMaterial" id=3]
-albedo_texture = ExtResource( 4 )
-
 [node name="Map" type="Spatial"]
 script = ExtResource( 2 )
 period = 10.0
@@ -74,12 +70,9 @@ omni_range = 200.0
 omni_shadow_mode = 0
 omni_shadow_detail = 0
 
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
 [node name="LineRenderer" parent="." instance=ExtResource( 3 )]
-material_override = SubResource( 3 )
-cast_shadow = 0
-points = [ Vector3( 0, 0, 0 ), Vector3( 0, 7, 0 ) ]
-startThickness = 1.0
-endThickness = 1.0
 
 [node name="MeleeGolem" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.5865, 8.09474, 49.4842 )
