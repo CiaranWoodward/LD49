@@ -3,7 +3,7 @@
 [ext_resource path="res://Helper/ViewportCamera.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 200, 200 )
+extents = Vector2( 325, 325 )
 
 [node name="ViewportCamera" type="Camera2D"]
 current = true
