@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Map/MapChunk.gd" type="Script" id=1]
 [ext_resource path="res://Map/GrassTopper.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Graphics/UI/Dirt0000.png" type="Texture" id=3]
 
 [sub_resource type="BoxShape" id=1]
 resource_local_to_scene = true
@@ -21,7 +22,7 @@ surfaces/0 = {
 }
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.596078, 0.427451, 0.427451, 1 )
+albedo_texture = ExtResource( 3 )
 ao_enabled = true
 ao_light_affect = 0.0
 ao_on_uv2 = false
@@ -44,4 +45,4 @@ mesh = SubResource( 4 )
 material/0 = SubResource( 3 )
 
 [node name="GrassTopper" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.49618, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
