@@ -14,7 +14,9 @@ func _ready() -> void:
 	for child in get_children():
 		child.connect("mouse_entered", self, "_mouse_entered", [child.name])
 		child.connect("mouse_exited", self, "_mouse_exited", [child.name])
+		child.connect("toggled", self, "_skill_toggled", [child.name])
 	Global.connect("player_selected", self, "_player_selected")
+	Global.connect("skill_selected", self, "_skill_selected")
 
 func _player_selected(id, player):
 	if is_instance_valid(player):
@@ -28,6 +30,19 @@ func _player_selected(id, player):
 		$Crater.visible = !melee
 	else:
 		self.visible = false
+		Global.selected_skill = Global.SkillType.None
+		for child in get_children():
+			child.pressed = false
+
+func _skill_selected(id):
+	for child in get_children():
+		child.pressed = (namemap[child.name] == id)
+
+func _skill_toggled(pressed, name):
+	if !pressed and Global.selected_skill == namemap[name]:
+		Global.selected_skill = Global.SkillType.None
+	if pressed and Global.selected_skill != namemap[name]:
+		Global.selected_skill = namemap[name]
 
 func _mouse_entered(item):
 	Global.hud.get_node("root/SkillPopUp").showtype(namemap[item])

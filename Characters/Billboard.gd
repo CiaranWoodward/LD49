@@ -51,4 +51,5 @@ func _ready():
 	$ViewportQuad.material_override.flags_transparent = true
 	$ViewportQuad.material_override.flags_do_not_receive_shadows = true
 	$ViewportQuad.material_override.params_billboard_mode = SpatialMaterial.BILLBOARD_ENABLED
+	$ViewportQuad.material_override.params_depth_draw_mode = SpatialMaterial.DEPTH_DRAW_ALPHA_OPAQUE_PREPASS
 	$ViewportQuad.material_override.albedo_texture = tex

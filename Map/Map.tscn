@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Map/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Map/Map.gd" type="Script" id=2]
@@ -42,6 +42,14 @@ dof_blur_near_enabled = true
 dof_blur_near_distance = 12.29
 dof_blur_near_transition = 2.88
 glow_enabled = true
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.980392, 0.760784, 0.105882, 1 )
+emission_enabled = true
+emission = Color( 0.952941, 0.745098, 0.309804, 1 )
+emission_energy = 0.23
+emission_operator = 0
+emission_on_uv2 = false
 
 [node name="Map" type="Spatial"]
 script = ExtResource( 2 )
@@ -93,3 +101,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.8526, 16.3107, 42.447 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6569, 11.4114, 45.9793 )
 
 [node name="LineRenderer" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.098237, 0 )
+material_override = SubResource( 3 )

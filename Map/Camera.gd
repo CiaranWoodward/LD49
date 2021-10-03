@@ -3,7 +3,7 @@ extends Camera
 export var MAX_HEIGHT : float = 125.0
 export var MIN_HEIGHT : float = 10.0
 export var distance : float = 120.0
-export var MAX_SPEED = 10.0
+export var MAX_SPEED = 5.0
 export var ACCEL_TIME = 0.5
 export var STOP_TIME = 0.2
 export var ZOOM_AMOUNT = 20.0
@@ -22,10 +22,22 @@ var dragging = false
 var rezoom = false
 var zoom = 1.0
 var target_zoom = 1.0
+var target_lookat_point = Vector3.ZERO
+var lookat_point = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	Global.connect("player_selected", self, "_player_selected")
+
+func _player_selected(id, player):
+	if is_instance_valid(player):
+		target_lookat_point = player.translation
+	else:
+		target_lookat_point = Vector3.ZERO
+	if target_lookat_point != lookat_point:
+		tween.remove(self, "lookat_point")
+		tween.interpolate_property(self, "lookat_point", lookat_point, target_lookat_point, 0.1, Tween.TRANS_SINE, Tween.EASE_OUT)
+		tween.start()
 
 func _unhandled_input(event):
 	Global.unhandled_input_queue.append(event)
@@ -70,9 +82,8 @@ func _bound_level():
 		height = MAX_HEIGHT
 	
 	var camdist = distance - zoom
-	self.translation = Vector3(cos(angle) * camdist, height, sin(angle) * camdist)
-	var lookatpoint = Vector3.ZERO
-	self.look_at(lookatpoint, Vector3(0, 1, 0))
+	self.translation = Vector3(cos(angle) * camdist, height, sin(angle) * camdist) + lookat_point
+	self.look_at(self.lookat_point, Vector3(0, 1, 0))
 
 func _process(delta: float) -> void:
 	if rezoom:
@@ -92,9 +103,9 @@ func _process(delta: float) -> void:
 	
 	var dir_delta = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
-		dir_delta.x += 1
-	if Input.is_action_pressed("ui_left"):
 		dir_delta.x -= 1
+	if Input.is_action_pressed("ui_left"):
+		dir_delta.x += 1
 	if Input.is_action_pressed("ui_up"):
 		dir_delta.y -= 1
 	if Input.is_action_pressed("ui_down"):
