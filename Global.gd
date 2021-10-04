@@ -22,7 +22,7 @@ enum SelectMask {
 }
 
 enum SkillType {
-	None, Crater, Raise, Ranged, Melee, MoveMelee, MoveRanged
+	None, Crater, Raise, Ranged, Melee, MoveMelee, MoveRanged, NextTurn
 }
 
 enum GameState {

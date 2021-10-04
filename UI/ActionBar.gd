@@ -6,7 +6,8 @@ var namemap = {
 	"Melee" : Global.SkillType.Melee,
 	"Ranged" : Global.SkillType.Ranged,
 	"Raise" : Global.SkillType.Raise,
-	"Crater" : Global.SkillType.Crater
+	"Crater" : Global.SkillType.Crater,
+	"NextTurn" : Global.SkillType.NextTurn
 	}
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +16,7 @@ func _ready() -> void:
 		child.connect("mouse_entered", self, "_mouse_entered", [child.name])
 		child.connect("mouse_exited", self, "_mouse_exited", [child.name])
 		child.connect("toggled", self, "_skill_toggled", [child.name])
+	self.visible = false
 	Global.connect("player_selected", self, "_player_selected")
 	Global.connect("skill_selected", self, "_skill_selected")
 
@@ -28,6 +30,7 @@ func _player_selected(id, player):
 		$MoveRanged.visible = !melee
 		$Ranged.visible = !melee
 		$Crater.visible = !melee
+		$NextTurn.visible = true
 	else:
 		self.visible = false
 		Global.selected_skill = Global.SkillType.None

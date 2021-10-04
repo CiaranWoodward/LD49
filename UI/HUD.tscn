@@ -197,7 +197,7 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 4 )
 
-[node name="Crater2" type="TextureButton" parent="root/ActionBar"]
+[node name="NextTurn" type="TextureButton" parent="root/ActionBar"]
 margin_left = 540.0
 margin_right = 620.0
 margin_bottom = 80.0
@@ -229,6 +229,9 @@ margin_bottom = -23.9729
 [node name="TextureButton" type="TextureButton" parent="root"]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Start"
