@@ -1308,7 +1308,7 @@ position = Vector2( 0, -205 )
 texture = ExtResource( 5 )
 
 [node name="EyeGlow" type="Sprite" parent="Position2D/Head"]
-self_modulate = Color( 0.898534, 0.900486, 1, 0 )
+self_modulate = Color( 0.889789, 0.891908, 1, 0 )
 texture = ExtResource( 1 )
 
 [node name="Body" type="Sprite" parent="Position2D"]

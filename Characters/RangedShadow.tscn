@@ -1,12 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Helper/SceneBillboard.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/2d/RangedShadow2d.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Characters/RangedShadow.gd" type="Script" id=3]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="CapsuleShape" id=1]
 
 [node name="RangedShadow" type="RigidBody"]
 mode = 3
+script = ExtResource( 3 )
+laserMaterial = SubResource( 2 )
 
 [node name="SceneBillboard" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53053, 0 )
