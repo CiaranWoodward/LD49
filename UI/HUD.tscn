@@ -204,7 +204,6 @@ margin_bottom = 80.0
 toggle_mode = true
 action_mode = 0
 texture_normal = ExtResource( 10 )
-texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 22 )
 
 [node name="CrystalStability" parent="root" instance=ExtResource( 2 )]

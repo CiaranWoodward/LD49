@@ -43,7 +43,7 @@ var paused = true setget _set_paused
 
 var selected_player = null setget _set_selected_player
 var selected_skill = SkillType.None setget _set_selected_skill
-var current_gamestate = GameState.PlayerTurn
+var current_gamestate = GameState.PlayerTurn setget _set_gamestate
 var current_movecost = 0 setget _set_movecost
 
 # Called when the node enters the scene tree for the first time.
@@ -55,13 +55,21 @@ func _set_paused(new):
 	emit_signal("paused_changed", paused)
 
 func _set_selected_player(new):
+	if current_gamestate != GameState.PlayerTurn:
+		return
 	selected_player = new
 	emit_signal("player_selected", players.find(new), new)
 	if !is_instance_valid(new):
 		_set_selected_skill(SkillType.None)
 
 func _set_selected_skill(new):
+	if current_gamestate != GameState.PlayerTurn:
+		return
 	selected_skill = new
+	if selected_skill == SkillType.NextTurn:
+		selected_skill = SkillType.None
+		_set_selected_player(null)
+		_set_gamestate(GameState.EnemyTurn)
 	emit_signal("skill_selected", new)
 
 func _set_gamestate(new):
