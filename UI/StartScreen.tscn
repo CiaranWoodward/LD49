@@ -88,7 +88,7 @@ tracks/1/path = NodePath("Intro:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -100,7 +100,7 @@ tracks/2/path = NodePath("Intro:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -219,7 +219,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
@@ -231,10 +231,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.8 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.8, 0.801 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true, false, false ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=7]
@@ -275,8 +275,6 @@ graph_offset = Vector2( 136, 21 )
 script = ExtResource( 6 )
 
 [node name="Start" type="Control" parent="."]
-visible = false
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.00452
@@ -321,8 +319,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -340.5
+margin_top = 7.86179
 margin_right = 340.5
-margin_bottom = 298.0
+margin_bottom = 305.862
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource( 4 )
@@ -331,6 +330,7 @@ stretch_mode = 6
 
 [node name="Intro" type="Control" parent="."]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -387,6 +387,8 @@ margin_top = 41.0
 margin_right = 370.0
 margin_bottom = 358.0
 custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Legend tells of a floating island high in the skies held up by a magical crystal. It is said that the crystal holds immeasurable power. Power that can alter the very land itself.
 
 The island is real.
@@ -400,7 +402,6 @@ valign = 1
 autowrap = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Start"
 anims/FadeOut = SubResource( 3 )
 anims/Intro = SubResource( 4 )
 anims/Start = SubResource( 5 )
