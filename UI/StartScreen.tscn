@@ -279,7 +279,6 @@ expand = true
 stretch_mode = 6
 
 [node name="Intro" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -323,8 +322,8 @@ margin_bottom = 370.0
 margin_right = 370.0
 margin_bottom = 37.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.443137, 0.47451, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.584314, 0.815686, 0.937255, 1 )
+custom_colors/font_color_shadow = Color( 0, 0.27451, 0.380392, 1 )
 text = "The Legend of Crysterra"
 align = 1
 valign = 1
