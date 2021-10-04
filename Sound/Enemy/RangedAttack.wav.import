@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/RangedAttack.wav-1c2b441cc8d64df96959025e3f4e9953.sample"
+
+[deps]
+
+source_file="res://Sound/Enemy/RangedAttack.wav"
+dest_files=[ "res://.import/RangedAttack.wav-1c2b441cc8d64df96959025e3f4e9953.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

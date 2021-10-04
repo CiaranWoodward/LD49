@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Graphics/Player Golems/Melee/EyeGlow0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/Player Golems/Melee/BottomBack0000.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Sound/Player/Hit.wav" type="AudioStream" id=12]
 [ext_resource path="res://Sound/Player/Die.wav" type="AudioStream" id=13]
 [ext_resource path="res://Sound/Player/Revive.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sound/Player/MeleeAttack.wav" type="AudioStream" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BackAttack"
@@ -220,6 +221,18 @@ tracks/16/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Position2D/Attack:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -543,6 +556,18 @@ tracks/16/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/17/type = "value"
+tracks/17/path = NodePath("Position2D/Attack:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Hit"
@@ -826,6 +851,54 @@ tracks/10/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Position2D/Arms/RightArm:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 91.0399, -56.9961 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Position2D/Arms/LeftArm:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -102.854, -67.8844 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Position2D/Arms/LeftArm:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Position2D/Arms/RightArm:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -1142,8 +1215,6 @@ node_connections = [ "output", 0, "Add2", "Add2", 0, "StateMachine", "Add2", 1, 
 [node name="MeleeGolem2d" type="Node2D"]
 
 [node name="Position2D" type="Position2D" parent="."]
-modulate = Color( 0.611765, 0.113725, 0.113725, 0.85098 )
-scale = Vector2( 0.95, 0.95 )
 
 [node name="Head" type="Sprite" parent="Position2D"]
 position = Vector2( 0, -205 )
@@ -1167,7 +1238,6 @@ texture = ExtResource( 2 )
 
 [node name="Arms" type="Sprite" parent="Position2D"]
 position = Vector2( 0, -200 )
-z_index = -8
 
 [node name="RightArm" type="Sprite" parent="Position2D/Arms"]
 position = Vector2( 91.0399, -56.9961 )
@@ -1181,11 +1251,11 @@ offset = Vector2( 102.854, 67.8844 )
 
 [node name="Smear" type="Sprite" parent="Position2D"]
 visible = false
-self_modulate = Color( 1, 1, 1, 0.438543 )
-position = Vector2( -101.729, -320.682 )
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -112.303, -105.266 )
 rotation = -0.255331
-scale = Vector2( 1.299, 1.58129 )
-z_index = -10
+scale = Vector2( 1.33415, 1.64962 )
+z_index = 10
 texture = ExtResource( 7 )
 
 [node name="Hit" type="AudioStreamPlayer" parent="Position2D"]
@@ -1196,6 +1266,9 @@ stream = ExtResource( 13 )
 
 [node name="Revive" type="AudioStreamPlayer" parent="Position2D"]
 stream = ExtResource( 14 )
+
+[node name="Attack" type="AudioStreamPlayer" parent="Position2D"]
+stream = ExtResource( 15 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
