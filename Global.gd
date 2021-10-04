@@ -18,7 +18,8 @@ enum CollisionLayer {
 
 enum SelectMask {
 	MOUSE_OVER = 1<<0,
-	PLAYER_ON = 1<<1
+	PLAYER_ON = 1<<1,
+	ENEMY_ON = 1<<2,
 }
 
 enum SkillType {
@@ -33,12 +34,22 @@ enum PlayerState {
 	Idle, Moving, Attacking
 }
 
+enum EnemyState {
+	Idle, Moving, Attacking
+}
+
+enum EnemyTarget { Crystal, Player }
+
 enum GolemType { Melee, Ranged }
+
+enum EnemyType { Baby, Melee, Ranged }
 
 var unhandled_input_queue = []
 var map = null
 var hud = null
 var players = []
+var enemies = []
+var enemy_iterator = 0
 var paused = true setget _set_paused
 
 var selected_player = null setget _set_selected_player
@@ -74,6 +85,8 @@ func _set_selected_skill(new):
 
 func _set_gamestate(new):
 	current_gamestate = new
+	if current_gamestate == GameState.EnemyTurn:
+		enemy_iterator = 0
 	emit_signal("gamestate_changed", new)
 
 func _set_movecost(new):
@@ -85,6 +98,9 @@ func _set_movecost(new):
 func add_player(new_player):
 	players.append(new_player)
 	emit_signal("players_modified")
+
+func add_enemy(new_enemy):
+	enemies.append(new_enemy)
 
 func is_move_skill_selected():
 	return (selected_skill == SkillType.MoveMelee or selected_skill == SkillType.MoveRanged)

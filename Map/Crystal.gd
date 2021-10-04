@@ -1,3 +1,4 @@
+tool
 extends RigidBody
 
 var map_chunk = null

@@ -104,7 +104,7 @@ material_override = ExtResource( 11 )
 cast_shadow = 0
 
 [node name="Crystal" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71161, 19.9625, -0.198647 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0173492, 0 )
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )

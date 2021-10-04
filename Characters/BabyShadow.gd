@@ -3,18 +3,19 @@ extends RigidBody
 signal stats_changed
 
 export var move_animation_speed : float = 30.0
-export var max_ap : int = 10
+export var max_ap : int = 5
 export var max_health : int = 10
-export var speed : float = 4.0
+export var speed : float = 1.0
 
-const golem_type = Global.GolemType.Melee
+const golem_type = Global.EnemyType.Baby
 
 var map_chunk = null
 var id = 0
 var ap = max_ap
 var health = max_health
 var selected = false
-var state = Global.PlayerState.Idle
+var state = Global.EnemyState.Idle
+var target = Global.EnemyTarget.Crystal
 var path = []
 
 onready var tween : Tween = Tween.new()
@@ -25,27 +26,12 @@ onready var stateMachine : AnimationNodeStateMachinePlayback = animTree["paramet
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_child(tween)
-	Global.add_player(self)
-	id = len(Global.players) - 1
-	Global.connect("player_selected", self, "_handle_player_selected")
-	Global.connect("gamestate_changed", self, "_handle_gamestate_changed")
+	Global.add_enemy(self)
 	animTree.active = true
-	stateMachine.start("Idle")
+	stateMachine.start("Spawn")
 
-func is_player():
+func is_enemy():
 	return true
-
-func _handle_player_selected(_id, player):
-	if selected && player != self:
-		selected = false
-		map_chunk.set_unselected(Global.SelectMask.PLAYER_ON)
-	if !selected && player == self:
-		selected = true
-		map_chunk.set_selected(Global.SelectMask.PLAYER_ON)
-
-func _handle_gamestate_changed(newstate):
-	if newstate == Global.GameState.PlayerTurn:
-		ap = max_ap
 
 func is_move_valid(pathf, cost) -> bool:
 	if cost > ap:
@@ -54,7 +40,7 @@ func is_move_valid(pathf, cost) -> bool:
 		return false
 	if is_instance_valid(pathf.back().occupant):
 		return false
-	if state != Global.PlayerState.Idle:
+	if state != Global.EnemyState.Idle:
 		return false
 	return true
 
@@ -65,7 +51,7 @@ func move(pathf, cost) -> bool:
 		return false
 	ap -= cost
 	emit_signal("stats_changed")
-	_change_state(Global.PlayerState.Moving)
+	_change_state(Global.EnemyState.Moving)
 	self.path = pathf
 	_change_chunk(path.back())
 	# Follow the path, then unset state
@@ -90,34 +76,34 @@ func _animate_nextstep(first = false):
 
 func _animate_nextstep_done():
 	if len(path) == 0:
-		_change_state(Global.PlayerState.Idle)
+		_change_state(Global.EnemyState.Idle)
 	else:
 		_animate_nextstep()
 
 func _change_state(newstate):
-	if newstate == Global.PlayerState.Moving:
+	if newstate == Global.EnemyState.Moving:
 		stateMachine.travel("Walk")
-	if newstate == Global.PlayerState.Idle:
+	if newstate == Global.EnemyState.Idle:
 		stateMachine.travel("Idle")
 	state = newstate
 
 func _change_chunk(newchunk):
 	if is_instance_valid(map_chunk):
 		if selected:
-			map_chunk.set_unselected(Global.SelectMask.PLAYER_ON)
+			map_chunk.set_unselected(Global.SelectMask.ENEMY_ON)
 		map_chunk.occupant = null
 	if is_instance_valid(newchunk):
 		if selected:
-			newchunk.set_selected(Global.SelectMask.PLAYER_ON)
+			newchunk.set_selected(Global.SelectMask.ENEMY_ON)
 		newchunk.occupant = self
 	map_chunk = newchunk
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if state == Global.PlayerState.Moving:
+	if state == Global.EnemyState.Moving:
 		pass
 	else:
 		if is_instance_valid(map_chunk):
 			self.translation = map_chunk.get_platform_visual_pos()
 		else:
-			_change_chunk(Global.map.get_random_chunk())
+			_change_chunk(Global.map.get_random_edge_chunk())

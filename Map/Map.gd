@@ -158,26 +158,26 @@ func _regen_chunk(x : int, z : int, displaceval) -> void:
 var prevfrom = null
 var prevto = null
 var prevresult = []
-# get a vector path for moving between two meshchunks, returns empty list if impossible
-func get_vec_path(from, to):
+# get a meshchunk path for moving between two meshchunks, returns empty list if impossible
+func get_mc_path(from, to):
 	#caching
 	if from == prevfrom and to == prevto:
 		return prevresult
 	var pp = astarmap.get_id_path(from.id, to.id)
 	var list = []
 	for id in pp:
-		list.append(id2chunk[id].get_platform_pos() + Vector3(0, 1, 0))
+		list.append(id2chunk[id])
 	prevfrom = from
 	prevto = to
 	prevresult = list
 	return list
 
-func get_mc_path(from, to):
-	var pp = astarmap.get_id_path(from.id, to.id)
-	var list = []
-	for id in pp:
-		list.append(id2chunk[id])
-	return list
+func get_vec_path(from, to):
+	var path = get_mc_path(from, to)
+	var vecpath = []
+	for mc in path:
+		vecpath.append(mc.get_platform_pos() + Vector3(0, 1, 0))
+	return vecpath
 
 func _update_annotation_color(newcolor):
 	if annotationMaterial.albedo_color != newcolor:
@@ -216,7 +216,7 @@ func _physics_process(delta: float) -> void:
 					var path = get_vec_path(Global.selected_player.map_chunk, prevselected)
 					$LineRenderer.points = path
 					Global.current_movecost = ceil(len(path) / Global.selected_player.speed)
-					_set_move_annotation_color(path, Global.current_movecost)
+					_set_move_annotation_color(get_mc_path(Global.selected_player.map_chunk, prevselected), Global.current_movecost)
 				else:
 					$LineRenderer.visible = false
 		if event.is_action_pressed("ui_cancel"):

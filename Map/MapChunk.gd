@@ -15,6 +15,7 @@ var visual_height_offset : float = 0
 # For the A* algorithm tracking
 var id = 0
 
+var occupant = null
 var selected_mask = 0
 
 # Called when the node enters the scene tree for the first time.
