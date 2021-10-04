@@ -1285,7 +1285,7 @@ states/StartWalk/position = Vector2( 508, -5 )
 states/Walk/node = SubResource( 23 )
 states/Walk/position = Vector2( 669.032, 90 )
 transitions = [ "EndWalk", "Idle", SubResource( 24 ), "Idle", "StartWalk", SubResource( 25 ), "Idle", "BackAttack", SubResource( 26 ), "Idle", "FrontAttack", SubResource( 27 ), "BackAttack", "Idle", SubResource( 28 ), "FrontAttack", "Idle", SubResource( 29 ), "StartWalk", "Walk", SubResource( 30 ), "Walk", "EndWalk", SubResource( 31 ), "Idle", "Die", SubResource( 32 ), "Die", "Revive", SubResource( 33 ), "Revive", "Idle", SubResource( 34 ), "Idle", "Hit", SubResource( 35 ), "Hit", "Idle", SubResource( 36 ) ]
-graph_offset = Vector2( -292.968, -37 )
+graph_offset = Vector2( -292.968, -21.368 )
 
 [sub_resource type="AnimationNodeBlendTree" id=38]
 nodes/Add2/node = SubResource( 11 )
@@ -1308,7 +1308,7 @@ position = Vector2( 0, -205 )
 texture = ExtResource( 5 )
 
 [node name="EyeGlow" type="Sprite" parent="Position2D/Head"]
-self_modulate = Color( 0.591487, 0.599685, 0.999925, 0.000585481 )
+self_modulate = Color( 0.898534, 0.900486, 1, 0 )
 texture = ExtResource( 1 )
 
 [node name="Body" type="Sprite" parent="Position2D"]
