@@ -1,10 +1,11 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Graphics/BabyShadow/Head0000.png" type="Texture" id=1]
 [ext_resource path="res://Helper/ViewportCamera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/2d/ShadowParticles.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sound/Enemy/Die.wav" type="AudioStream" id=4]
 [ext_resource path="res://Sound/Enemy/Spawn.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sound/Enemy/Hit.wav" type="AudioStream" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Die"
@@ -159,6 +160,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1.93187, 1 ),
 "update": 0,
 "values": [ Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Position2D/Hit:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 2,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -427,6 +440,7 @@ node_connections = [ "output", 0, "StateMachine" ]
 [node name="MeleeGolem2d" type="Node2D"]
 
 [node name="Position2D" type="Position2D" parent="."]
+modulate = Color( 1, 1, 1, 0.85098 )
 
 [node name="Head" type="Sprite" parent="Position2D"]
 texture = ExtResource( 1 )
@@ -436,6 +450,9 @@ stream = ExtResource( 4 )
 
 [node name="Spawn" type="AudioStreamPlayer" parent="Position2D"]
 stream = ExtResource( 5 )
+
+[node name="Hit" type="AudioStreamPlayer" parent="Position2D"]
+stream = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Spawn"
