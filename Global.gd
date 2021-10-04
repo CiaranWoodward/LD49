@@ -9,7 +9,10 @@ signal movecost_calculated(newcost)
 
 enum CollisionLayer {
 	SCENERY = 1<<0,
-	SELECTABLE_SCENERY = 1<<10
+	SELECTABLE_SCENERY = 1<<10,
+	SELECTABLE_PLAYER = 1<<11,
+	SELECTABLE_ENEMY = 1<<12,
+	SELECTABLE_ALL = 1<<10 | 1<<11 | 1<<12
 }
 
 enum SelectMask {

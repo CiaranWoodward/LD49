@@ -151,11 +151,23 @@ func _process(delta: float) -> void:
 	
 	_bound_level()
 
-func get_scenery_at_point(screenpoint = Vector2.INF):
+func _get_selectable_at_point(screenpoint, mask):
 	if screenpoint == Vector2.INF:
 		screenpoint = get_viewport().get_mouse_position()
 	var space_state = get_world().direct_space_state
 	var from = project_ray_origin(screenpoint)
 	var to = from + project_ray_normal(screenpoint) * far
-	var colinfo = space_state.intersect_ray(from, to, [], Global.CollisionLayer.SELECTABLE_SCENERY)
+	var colinfo = space_state.intersect_ray(from, to, [], mask)
 	return colinfo.get("collider")
+
+func get_selectable_at_point(screenpoint = Vector2.INF):
+	return _get_selectable_at_point(screenpoint, Global.CollisionLayer.SELECTABLE_ALL)
+
+func get_scenery_at_point(screenpoint = Vector2.INF):
+	return _get_selectable_at_point(screenpoint, Global.CollisionLayer.SELECTABLE_SCENERY)
+
+func get_player_at_point(screenpoint = Vector2.INF):
+	return _get_selectable_at_point(screenpoint, Global.CollisionLayer.SELECTABLE_PLAYER)
+
+func get_enemy_at_point(screenpoint = Vector2.INF):
+	return _get_selectable_at_point(screenpoint, Global.CollisionLayer.SELECTABLE_ENEMY)

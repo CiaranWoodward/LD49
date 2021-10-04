@@ -31,6 +31,9 @@ func _ready() -> void:
 	animTree.active = true
 	stateMachine.start("Idle")
 
+func is_player():
+	return true
+
 func _handle_player_selected(_id, player):
 	if selected && player != self:
 		selected = false

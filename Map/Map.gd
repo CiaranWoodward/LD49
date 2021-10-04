@@ -186,9 +186,11 @@ func _physics_process(delta: float) -> void:
 		var event = Global.unhandled_input_queue.pop_front()
 		# TODO: Handle input
 		if (event is InputEventMouseButton) and (event.button_index == BUTTON_LEFT) and (!event.pressed):
-			var scenery = $Camera.get_scenery_at_point(event.position)
-			if is_instance_valid(scenery):
-				if Global.is_move_skill_selected() and is_instance_valid(Global.selected_player):
+			var clicked = $Camera.get_selectable_at_point(event.position)
+			if is_instance_valid(clicked):
+				if clicked.has_method("is_player") and !is_instance_valid(Global.selected_player):
+					Global.selected_player = clicked
+				elif Global.is_move_skill_selected() and is_instance_valid(Global.selected_player):
 					Global.selected_player.move(get_mc_path(prevfrom, prevto), Global.current_movecost)
 		if (event is InputEventMouseMotion):
 			if is_instance_valid(prevselected):

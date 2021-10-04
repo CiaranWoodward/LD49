@@ -22,6 +22,9 @@ func _ready() -> void:
 	topperheight = $GrassTopper.mesh.size.y
 	_regenerate_mesh()
 
+func is_scenery():
+	return true
+
 func _regenerate_mesh() -> void:
 	var cm = CubeMesh.new()
 	cm.size = Vector3(width, height - topperheight, width)
