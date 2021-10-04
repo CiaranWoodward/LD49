@@ -4,13 +4,18 @@
 [ext_resource path="res://Characters/2d/MeleeShadow2d.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
+radius = 2.29273
+height = 4.5677
 
 [node name="MeleeShadow" type="RigidBody"]
+collision_layer = 4100
 mode = 3
 
 [node name="SceneBillboard" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9871, 0 )
+output_size = Vector2( 10, 10 )
 scene = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.115545, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4.87155, 0 )
 shape = SubResource( 1 )

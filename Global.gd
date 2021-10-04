@@ -33,7 +33,7 @@ enum GameState {
 }
 
 enum PlayerState {
-	Idle, Moving, Attacking
+	Idle, Moving, Attacking, Dead
 }
 
 enum EnemyState {

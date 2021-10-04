@@ -1549,7 +1549,7 @@ states/StartWalk/position = Vector2( 508, -5 )
 states/Walk/node = SubResource( 20 )
 states/Walk/position = Vector2( 669.032, 90 )
 transitions = [ "EndWalk", "Idle", SubResource( 21 ), "Idle", "StartWalk", SubResource( 22 ), "Idle", "BackAttack", SubResource( 23 ), "Idle", "FrontAttack", SubResource( 24 ), "BackAttack", "Idle", SubResource( 25 ), "FrontAttack", "Idle", SubResource( 26 ), "StartWalk", "Walk", SubResource( 27 ), "Walk", "EndWalk", SubResource( 28 ), "Idle", "Die", SubResource( 29 ), "Idle", "Hit", SubResource( 30 ), "Hit", "Idle", SubResource( 31 ), "Spawn", "Idle", SubResource( 32 ) ]
-graph_offset = Vector2( -456.968, -111 )
+graph_offset = Vector2( -292.314, -139.689 )
 
 [sub_resource type="AnimationNodeBlendTree" id=34]
 nodes/StateMachine/node = SubResource( 33 )
@@ -1564,11 +1564,11 @@ node_connections = [ "output", 0, "StateMachine" ]
 [node name="Position2D" type="Position2D" parent="."]
 
 [node name="Head" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -205 )
+position = Vector2( 0, -201.938 )
 texture = ExtResource( 3 )
 
 [node name="Arms" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -200 )
+position = Vector2( 0, -193.718 )
 
 [node name="LeftArm" type="Sprite" parent="Position2D/Arms"]
 position = Vector2( -55, -55 )
@@ -1583,14 +1583,15 @@ texture = ExtResource( 4 )
 offset = Vector2( -59.4508, 36.6874 )
 
 [node name="Body" type="Sprite" parent="Position2D"]
-position = Vector2( 0, -205 )
+position = Vector2( 0, -205.729 )
 texture = ExtResource( 5 )
 
 [node name="Smear" type="Sprite" parent="Position2D"]
 self_modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 87.817, -240.964 )
-rotation = -0.665787
-z_index = -2
+position = Vector2( 229.904, -105.266 )
+rotation = -0.255331
+scale = Vector2( 1.33415, 1.64962 )
+z_index = 10
 texture = ExtResource( 2 )
 
 [node name="Die" type="AudioStreamPlayer" parent="Position2D"]
@@ -1617,6 +1618,7 @@ anims/Walking = SubResource( 9 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 34 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/StateMachine/playback = SubResource( 35 )
 parameters/StateMachine/Walk/TimeScale/scale = 3.0
 

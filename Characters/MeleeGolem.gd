@@ -4,7 +4,7 @@ signal stats_changed
 
 export var move_animation_speed : float = 30.0
 export var max_ap : int = 6
-export var max_health : int = 10
+export var max_health : int = 50
 export var speed : float = 4.0
 export var attack_ap : int = 2
 export var damage_min : int = 4
@@ -61,6 +61,15 @@ func attack(enemy) -> bool:
 			stateMachine.travel("FrontAttack")
 			return true
 	return false
+
+func damage(dam):
+	health -= dam
+	if health < 0:
+		stateMachine.travel("Die")
+		state = Global.PlayerState.Dead
+	else:
+		stateMachine.travel("Hit")
+	emit_signal("stats_changed")
 
 func is_move_valid(pathf, cost) -> bool:
 	if cost > ap:
