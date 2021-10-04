@@ -7,6 +7,7 @@ onready var stateMachine : AnimationNodeStateMachinePlayback = animTree["paramet
 func _ready() -> void:
 	animTree.active = true
 	stateMachine.start("Start")
+	Global.connect("gamestate_changed", self, "_handle_gamestate")
 
 func _on_PlayButton_pressed() -> void:
 	stateMachine.travel("Intro")
@@ -15,3 +16,7 @@ func _on_Intro_gui_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseMotion):
 		stateMachine.travel("FadeOut")
 		Global.paused = false
+
+func _handle_gamestate(newstate):
+	if newstate == Global.GameState.GameOver:
+		stateMachine.start("Fail")

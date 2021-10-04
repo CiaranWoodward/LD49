@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Graphics/UI/Icons/Crystal0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/UI/Bar/Bottom0000.png" type="Texture" id=2]
 [ext_resource path="res://Graphics/UI/Bar/Top0000.png" type="Texture" id=3]
+[ext_resource path="res://UI/CrystalStability.gd" type="Script" id=4]
 
 [node name="CrystalStability" type="Control"]
 anchor_right = 1.0
@@ -11,6 +12,7 @@ margin_left = 0.594604
 margin_right = -603.405
 margin_bottom = -520.0
 rect_min_size = Vector2( 420, 80 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -21,13 +23,14 @@ anchor_bottom = 0.5
 margin_top = -20.0
 margin_right = 380.0
 margin_bottom = 20.0
+value = 100.0
 texture_under = ExtResource( 2 )
 texture_over = ExtResource( 3 )
 texture_progress = ExtResource( 2 )
 fill_mode = 1
 tint_under = Color( 0.439216, 0.439216, 0.439216, 0.572549 )
 tint_over = Color( 1, 0.984314, 0, 1 )
-tint_progress = Color( 0.203922, 0.384314, 1, 1 )
+tint_progress = Color( 0.364706, 0.717647, 1, 1 )
 nine_patch_stretch = true
 __meta__ = {
 "_edit_use_anchors_": false

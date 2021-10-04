@@ -8,6 +8,7 @@ signal gamestate_changed(newstate)
 signal players_modified()
 signal movecost_calculated(newcost)
 signal paused_changed(newstate)
+signal crystalstability_changed(newval)
 
 enum CollisionLayer {
 	SCENERY = 1<<0,
@@ -28,7 +29,7 @@ enum SkillType {
 }
 
 enum GameState {
-	PlayerTurn, EnemyTurn, MapTurn
+	PlayerTurn, EnemyTurn, MapTurn, GameOver
 }
 
 enum PlayerState {
@@ -52,7 +53,7 @@ var players = []
 var enemies = []
 var enemy_iterator = 0
 var map_countdown = 2
-var crystal_health : int = 100
+var crystal_health : int = 1
 var paused = true setget _set_paused
 
 var selected_player = null setget _set_selected_player
@@ -132,6 +133,13 @@ func add_enemy(new_enemy):
 
 func remove_enemy(enem):
 	enemies.erase(enem)
+
+func damage_crystal(dam):
+	crystal_health -= dam
+	crystal_health = int(clamp(crystal_health, 0, 100))
+	emit_signal("crystalstability_changed", crystal_health)
+	if crystal_health <= 0:
+		_set_gamestate(GameState.GameOver)
 
 func regen_done():
 	if current_gamestate == GameState.MapTurn:

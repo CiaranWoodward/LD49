@@ -5,7 +5,7 @@ signal stats_changed
 export var move_animation_speed : float = 30.0
 export var max_ap : int = 5
 export var max_health : int = 5
-export var speed : float = 1.0
+export var speed : float = 2.0
 
 const golem_type = Global.EnemyType.Baby
 
@@ -99,7 +99,8 @@ func move(pathf, cost) -> bool:
 
 func _handle_attacking():
 	if Global.is_adjacent(map_chunk.x, 0, map_chunk.z, 0):
-		pass # TODO: Attack crystal
+		stateMachine.travel("Die")
+		Global.damage_crystal(10)
 	Global.next_enemy()
 
 func _animate_nextstep(first = false):
