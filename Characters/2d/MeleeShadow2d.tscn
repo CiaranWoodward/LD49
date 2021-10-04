@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Graphics/MeleeShadow/LeftArm0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/MeleeShadow/Smear0000.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Characters/2d/ShadowParticles.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sound/Enemy/Die.wav" type="AudioStream" id=8]
 [ext_resource path="res://Sound/Enemy/Spawn.wav" type="AudioStream" id=9]
+[ext_resource path="res://Sound/Enemy/Hit.wav" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BackAttack"
@@ -877,6 +878,18 @@ tracks/13/keys = {
 "update": 0,
 "values": [ Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
 }
+tracks/14/type = "value"
+tracks/14/path = NodePath("Position2D/Hit:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 2,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 1.8
@@ -1585,6 +1598,9 @@ stream = ExtResource( 8 )
 
 [node name="Spawn" type="AudioStreamPlayer" parent="Position2D"]
 stream = ExtResource( 9 )
+
+[node name="Hit" type="AudioStreamPlayer" parent="Position2D"]
+stream = ExtResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Spawn"
