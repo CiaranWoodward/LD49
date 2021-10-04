@@ -1,0 +1,10 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+flags_do_not_receive_shadows = true
+albedo_color = Color( 0.929412, 0.756863, 0.168627, 1 )
+emission_enabled = true
+emission = Color( 0.870588, 0.839216, 0.776471, 1 )
+emission_energy = 0.05
+emission_operator = 0
+emission_on_uv2 = false
