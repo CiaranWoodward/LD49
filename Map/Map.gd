@@ -25,6 +25,8 @@ var mapedgeset = []
 var id_count = 0
 var astarmap : AStar
 
+var annotationMaterial : SpatialMaterial = preload("res://Map/AnnotationMaterial.tres")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
@@ -32,6 +34,7 @@ func _ready() -> void:
 	_initial_mapgen()
 	_generate_navmesh()
 	Global.map = self
+	_reset_annotation_color()
 
 func _regen_map() -> void:
 	var noise = OpenSimplexNoise.new()
@@ -162,6 +165,17 @@ func get_mc_path(from, to):
 	for id in pp:
 		list.append(id2chunk[id])
 	return list
+
+func _reset_annotation_color():
+	annotationMaterial.albedo_color = Color(1, 0.8, 0.2)
+
+func _set_move_annotation_color(path, cost):
+	var valid = Global.selected_player.is_move_valid(path, cost)
+	if valid:
+		_reset_annotation_color()
+	else:
+		annotationMaterial.albedo_color = Color(1, 0, 0)
+	
 
 var prevselected = null
 func _physics_process(delta: float) -> void:

@@ -4,6 +4,8 @@ extends Spatial
 export(Vector2) var output_size = Vector2(5, 5) setget set_output_size
 export(PackedScene) var scene : PackedScene = null
 
+var scene2d : Node2D = null
+
 func set_output_size(new):
 	output_size = new
 	$ViewportQuad.mesh.size = new
@@ -28,6 +30,7 @@ func set_scene(new):
 		print("Error: No viewport camera in billboard scene")
 	# Add the scene to viewport
 	$Viewport.add_child(childscene)
+	scene2d = childscene
 	print("added viewport child scene")
 	if Engine.editor_hint:
 		childscene.owner = get_tree().edited_scene_root
@@ -53,3 +56,6 @@ func _ready():
 	$ViewportQuad.material_override.params_billboard_mode = SpatialMaterial.BILLBOARD_ENABLED
 	$ViewportQuad.material_override.params_depth_draw_mode = SpatialMaterial.DEPTH_DRAW_ALPHA_OPAQUE_PREPASS
 	$ViewportQuad.material_override.albedo_texture = tex
+
+func get_childscene() -> Node2D:
+	return scene2d

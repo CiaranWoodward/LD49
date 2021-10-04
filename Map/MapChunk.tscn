@@ -3,12 +3,13 @@
 [ext_resource path="res://Map/MapChunk.gd" type="Script" id=1]
 [ext_resource path="res://Map/GrassTopper.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Graphics/UI/Dirt0000.png" type="Texture" id=3]
+[ext_resource path="res://Map/AnnotationMaterial.tres" type="Material" id=4]
 
 [sub_resource type="BoxShape" id=1]
 resource_local_to_scene = true
 extents = Vector3( 2.5, 5, 2.5 )
 
-[sub_resource type="ArrayMesh" id=6]
+[sub_resource type="ArrayMesh" id=2]
 surfaces/0 = {
 "aabb": AABB( -2.5, -4.5, -2.5, 5, 9.00001, 5.00001 ),
 "array_data": PoolByteArray( 0, 0, 32, 192, 0, 0, 144, 64, 0, 0, 32, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 0, 0, 0, 32, 64, 0, 0, 144, 64, 0, 0, 32, 192, 0, 0, 129, 0, 129, 0, 0, 127, 85, 57, 0, 0, 0, 0, 32, 64, 0, 0, 144, 64, 0, 0, 32, 64, 0, 0, 127, 0, 127, 0, 0, 127, 85, 53, 0, 0, 0, 0, 32, 192, 0, 0, 144, 64, 0, 0, 32, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 60, 0, 0, 0, 0, 32, 192, 0, 0, 144, 192, 0, 0, 32, 64, 0, 0, 127, 0, 127, 0, 0, 127, 0, 0, 0, 56, 0, 0, 32, 64, 0, 0, 144, 192, 0, 0, 32, 192, 0, 0, 129, 0, 129, 0, 0, 127, 85, 57, 0, 56, 0, 0, 32, 64, 0, 0, 144, 192, 0, 0, 32, 64, 0, 0, 127, 0, 127, 0, 0, 127, 85, 53, 0, 56, 0, 0, 32, 192, 0, 0, 144, 192, 0, 0, 32, 192, 0, 0, 129, 0, 129, 0, 0, 127, 0, 60, 0, 56, 0, 0, 32, 64, 0, 0, 144, 64, 0, 0, 32, 64, 127, 0, 0, 0, 0, 0, 129, 127, 85, 53, 0, 0, 0, 0, 32, 192, 0, 0, 144, 64, 0, 0, 32, 192, 129, 0, 0, 0, 0, 0, 127, 127, 0, 0, 0, 56, 0, 0, 32, 64, 0, 0, 144, 64, 0, 0, 32, 192, 127, 0, 0, 0, 0, 0, 129, 127, 85, 57, 0, 0, 0, 0, 32, 192, 0, 0, 144, 64, 0, 0, 32, 64, 129, 0, 0, 0, 0, 0, 127, 127, 85, 53, 0, 56, 0, 0, 32, 64, 0, 0, 144, 192, 0, 0, 32, 64, 127, 0, 0, 0, 0, 0, 129, 127, 85, 53, 0, 56, 0, 0, 32, 192, 0, 0, 144, 192, 0, 0, 32, 192, 129, 0, 0, 0, 0, 0, 127, 127, 0, 0, 0, 60, 0, 0, 32, 64, 0, 0, 144, 192, 0, 0, 32, 192, 127, 0, 0, 0, 0, 0, 129, 127, 85, 57, 0, 56, 0, 0, 32, 192, 0, 0, 144, 192, 0, 0, 32, 64, 129, 0, 0, 0, 0, 0, 127, 127, 85, 53, 0, 60, 0, 0, 32, 64, 0, 0, 144, 64, 0, 0, 32, 64, 0, 127, 0, 0, 129, 0, 0, 127, 85, 53, 0, 56, 0, 0, 32, 192, 0, 0, 144, 192, 0, 0, 32, 64, 0, 129, 0, 0, 127, 0, 0, 127, 85, 57, 0, 56, 0, 0, 32, 192, 0, 0, 144, 64, 0, 0, 32, 64, 0, 127, 0, 0, 129, 0, 0, 127, 85, 57, 0, 56, 0, 0, 32, 64, 0, 0, 144, 192, 0, 0, 32, 64, 0, 129, 0, 0, 127, 0, 0, 127, 0, 60, 0, 56, 0, 0, 32, 64, 0, 0, 144, 64, 0, 0, 32, 192, 0, 127, 0, 0, 129, 0, 0, 127, 85, 53, 0, 60, 0, 0, 32, 192, 0, 0, 144, 192, 0, 0, 32, 192, 0, 129, 0, 0, 127, 0, 0, 127, 85, 57, 0, 60, 0, 0, 32, 192, 0, 0, 144, 64, 0, 0, 32, 192, 0, 127, 0, 0, 129, 0, 0, 127, 85, 57, 0, 60, 0, 0, 32, 64, 0, 0, 144, 192, 0, 0, 32, 192, 0, 129, 0, 0, 127, 0, 0, 127, 0, 60, 0, 60 ),
@@ -29,16 +30,8 @@ ao_on_uv2 = false
 ao_texture_channel = 0
 uv1_scale = Vector3( 3, 2, 1 )
 
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.92549, 0.694118, 0.0784314, 1 )
-emission_enabled = true
-emission = Color( 1, 0.792157, 0.168627, 1 )
-emission_energy = 0.14
-emission_operator = 0
-emission_on_uv2 = false
-
-[sub_resource type="CubeMesh" id=5]
-material = SubResource( 4 )
+[sub_resource type="CubeMesh" id=4]
+material = ExtResource( 4 )
 size = Vector3( 4, 0.5, 4 )
 
 [node name="MapChunk" type="RigidBody"]
@@ -53,7 +46,7 @@ shape = SubResource( 1 )
 [node name="Mesh" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0 )
 generate_lightmap = false
-mesh = SubResource( 6 )
+mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="GrassTopper" parent="." instance=ExtResource( 2 )]
@@ -62,7 +55,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0 )
 [node name="Selected" type="MeshInstance" parent="GrassTopper"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.510858, 0 )
 visible = false
-mesh = SubResource( 5 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Tween" type="Tween" parent="."]
