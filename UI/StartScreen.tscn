@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Graphics/UI/Frame0000.png" type="Texture" id=1]
-[ext_resource path="res://Graphics/UI/Icons/PlayHover0000.png" type="Texture" id=2]
-[ext_resource path="res://Graphics/UI/Icons/Play0000.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/UI/PlayHover0000.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/UI/Play0000.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/UI/Title0000.png" type="Texture" id=4]
 [ext_resource path="res://UI/Ubuntu-Regular.ttf" type="DynamicFontData" id=5]
 
@@ -41,6 +41,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Start:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Intro:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Intro"
@@ -76,16 +100,16 @@ resource_name = "Start"
 length = 4.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Start/TextureRect:rect_position")
+tracks/0/path = NodePath("Start/Title/TitleArt:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.1, 4 ),
-"transitions": PoolRealArray( 0.517632, 0.659754, 1 ),
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 0.517632, 0.68302, 1 ),
 "update": 0,
-"values": [ Vector2( 171.5, 0 ), Vector2( 171.5, 6.67419 ), Vector2( 171.5, 0 ) ]
+"values": [ Vector2( -320.5, 0 ), Vector2( -320.5, 10 ), Vector2( -320.5, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Start:modulate")
@@ -110,6 +134,30 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Intro:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Start:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -140,10 +188,43 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "FadeOut"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Intro"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Start"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "ToIntro"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=14]
+states/FadeOut/node = SubResource( 7 )
+states/FadeOut/position = Vector2( 973, 162 )
+states/Intro/node = SubResource( 8 )
+states/Intro/position = Vector2( 803, 162 )
+states/Start/node = SubResource( 9 )
+states/Start/position = Vector2( 458, 162 )
+states/ToIntro/node = SubResource( 10 )
+states/ToIntro/position = Vector2( 622, 162 )
+transitions = [ "Start", "ToIntro", SubResource( 11 ), "Intro", "FadeOut", SubResource( 12 ), "ToIntro", "Intro", SubResource( 13 ) ]
+graph_offset = Vector2( 136, 21 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
+
 [node name="StartScreen" type="CanvasLayer"]
 
 [node name="Start" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.00452
@@ -154,36 +235,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="Start"]
+[node name="PlayButton" type="TextureButton" parent="Start"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -15.0
-margin_bottom = -15.0
+margin_left = -170.0
+margin_top = -120.0
+margin_right = -10.0
+margin_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
-rect_min_size = Vector2( 100, 100 )
+rect_min_size = Vector2( 170, 120 )
 texture_normal = ExtResource( 3 )
 texture_hover = ExtResource( 2 )
 expand = true
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Start/TextureButton"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-align = 1
-valign = 1
+[node name="Title" type="Control" parent="Start"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureRect" type="TextureRect" parent="Start"]
+[node name="TitleArt" type="TextureRect" parent="Start/Title"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -340.5
-margin_top = 1.36492
+margin_top = 6.71533
 margin_right = 340.5
-margin_bottom = 299.365
+margin_bottom = 304.715
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
@@ -192,6 +282,7 @@ stretch_mode = 6
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -226,7 +317,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Intro/Intro/MarginContainer"]
 margin_right = 370.0
-margin_bottom = 440.0
+margin_bottom = 370.0
 
 [node name="Title" type="Label" parent="Intro/Intro/MarginContainer/VBoxContainer"]
 margin_right = 370.0
@@ -261,3 +352,8 @@ anims/FadeOut = SubResource( 3 )
 anims/Intro = SubResource( 4 )
 anims/Start = SubResource( 5 )
 anims/ToIntro = SubResource( 6 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 14 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 15 )

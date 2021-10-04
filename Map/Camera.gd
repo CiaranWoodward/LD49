@@ -102,14 +102,18 @@ func _process(delta: float) -> void:
 		return
 	
 	var dir_delta = Vector2.ZERO
-	if Input.is_action_pressed("ui_right"):
-		dir_delta.x -= 1
-	if Input.is_action_pressed("ui_left"):
-		dir_delta.x += 1
-	if Input.is_action_pressed("ui_up"):
-		dir_delta.y -= 1
-	if Input.is_action_pressed("ui_down"):
-		dir_delta.y += 1
+	if Global.paused:
+		dir_delta.x = -0.05
+		dir_delta.y = 0 
+	else:
+		if Input.is_action_pressed("ui_right"):
+			dir_delta.x -= 1
+		if Input.is_action_pressed("ui_left"):
+			dir_delta.x += 1
+		if Input.is_action_pressed("ui_up"):
+			dir_delta.y -= 1
+		if Input.is_action_pressed("ui_down"):
+			dir_delta.y += 1
 	if speed == 0:
 		dir_vec = dir_delta
 	
