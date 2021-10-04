@@ -2,6 +2,7 @@ tool
 extends Node
 
 signal player_selected(id, player)
+signal enemy_selected(enemy)
 signal skill_selected(id)
 signal gamestate_changed(newstate)
 signal players_modified()
@@ -53,6 +54,7 @@ var enemy_iterator = 0
 var paused = true setget _set_paused
 
 var selected_player = null setget _set_selected_player
+var selected_enemy = null
 var selected_skill = SkillType.None setget _set_selected_skill
 var current_gamestate = GameState.PlayerTurn setget _set_gamestate
 var current_movecost = 0 setget _set_movecost
@@ -87,6 +89,7 @@ func _set_gamestate(new):
 	current_gamestate = new
 	if current_gamestate == GameState.EnemyTurn:
 		enemy_iterator = 0
+		next_enemy()
 	emit_signal("gamestate_changed", new)
 
 func _set_movecost(new):
@@ -94,6 +97,14 @@ func _set_movecost(new):
 		return
 	current_movecost = new
 	emit_signal("movecost_calculated", new)
+
+func next_enemy():
+	if enemy_iterator >= len(enemies):
+		_set_gamestate(GameState.MapTurn)
+	else:
+		selected_enemy = enemies[enemy_iterator]
+		enemy_iterator += 1
+		emit_signal("enemy_selected", selected_enemy)
 
 func add_player(new_player):
 	players.append(new_player)

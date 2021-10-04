@@ -46,6 +46,7 @@ func _set_crystal():
 		for zi in [-1, 0, 1]:
 			get_chunk(xi, zi).set_exact_displacement(heightsum)
 	$Crystal.map_chunk = get_chunk(0, 0)
+	get_chunk(0, 0).occupant = $Crystal
 
 func _regen_map() -> void:
 	var noise = OpenSimplexNoise.new()

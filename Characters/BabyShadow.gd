@@ -33,6 +33,9 @@ func _ready() -> void:
 func is_enemy():
 	return true
 
+func _handle_enemy_changed(enemy):
+	pass
+
 func is_move_valid(pathf, cost) -> bool:
 	if cost > ap:
 		return false
