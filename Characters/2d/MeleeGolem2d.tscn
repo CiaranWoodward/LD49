@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Graphics/Player Golems/Melee/EyeGlow0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/Player Golems/Melee/BottomBack0000.png" type="Texture" id=2]
@@ -205,6 +205,18 @@ tracks/15/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ -8 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Position2D/Smear:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -516,6 +528,155 @@ tracks/15/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/16/type = "value"
+tracks/16/path = NodePath("Position2D/Smear:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=34]
+resource_name = "Hit"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D/Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 0.594604, 0.63728, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -205 ), Vector2( 0, -195 ), Vector2( 0, -205 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Position2D/Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 2 ),
+"transitions": PoolRealArray( 1.56917, 0.784584, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -205 ), Vector2( 0, -210 ), Vector2( 0, -205 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Position2D/Bottom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.3, 2 ),
+"transitions": PoolRealArray( 0.63728, 1.18921, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -210 ), Vector2( 0, -230 ), Vector2( 0, -210 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Position2D/Arms:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1.86607 ),
+"update": 0,
+"values": [ Vector2( 0, -200 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Position2D/Arms:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Position2D/Bottom:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Position2D/Body:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Position2D/Head:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Position2D/Smear:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Position2D:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Position2D:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 length = 2.0
@@ -627,6 +788,30 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Position2D:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Position2D:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -955,6 +1140,7 @@ texture = ExtResource( 2 )
 
 [node name="Arms" type="Sprite" parent="Position2D"]
 position = Vector2( 0, -200 )
+z_index = -8
 
 [node name="RightArm" type="Sprite" parent="Position2D/Arms"]
 position = Vector2( 91.0399, -56.9961 )
@@ -971,7 +1157,7 @@ visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -11.7725, -181.634 )
 rotation = -0.255331
-z_index = 10
+z_index = -10
 texture = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -981,6 +1167,7 @@ anims/Die = ExtResource( 11 )
 anims/EndWalk = SubResource( 2 )
 anims/EyeGlow = SubResource( 3 )
 anims/FrontAttack = SubResource( 4 )
+anims/Hit = SubResource( 34 )
 anims/Idle = SubResource( 5 )
 anims/Revive = ExtResource( 10 )
 anims/StartWalk = SubResource( 6 )
