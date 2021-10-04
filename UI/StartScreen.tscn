@@ -1,15 +1,155 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Graphics/UI/Frame0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/UI/Icons/PlayHover0000.png" type="Texture" id=2]
 [ext_resource path="res://Graphics/UI/Icons/Play0000.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/UI/Title0000.png" type="Texture" id=4]
+[ext_resource path="res://UI/Ubuntu-Regular.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 14
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "FadeOut"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Start:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Intro:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 0.594604, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Intro"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Start:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Intro:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Start"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Start/TextureRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.1, 4 ),
+"transitions": PoolRealArray( 0.517632, 0.659754, 1 ),
+"update": 0,
+"values": [ Vector2( 171.5, 0 ), Vector2( 171.5, 6.67419 ), Vector2( 171.5, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Start:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Intro:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "ToIntro"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Start:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.001, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Intro:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="StartScreen" type="CanvasLayer"]
 
 [node name="Start" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 4.00452
+margin_top = -5.33936
+margin_right = 4.00452
+margin_bottom = -5.33936
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -41,14 +181,15 @@ valign = 1
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -340.5
+margin_top = 1.36492
 margin_right = 340.5
-margin_bottom = 298.0
+margin_bottom = 299.365
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
 
 [node name="Intro" type="Control" parent="."]
-visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -85,25 +226,26 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Intro/Intro/MarginContainer"]
 margin_right = 370.0
-margin_bottom = 370.0
-alignment = 1
+margin_bottom = 440.0
 
 [node name="Title" type="Label" parent="Intro/Intro/MarginContainer/VBoxContainer"]
-margin_top = 33.0
 margin_right = 370.0
-margin_bottom = 47.0
-text = "The Crystal Guardians"
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.443137, 0.47451, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "The Legend of Crysterra"
 align = 1
 valign = 1
 
 [node name="Label" type="Label" parent="Intro/Intro/MarginContainer/VBoxContainer"]
-margin_top = 51.0
+margin_top = 41.0
 margin_right = 370.0
-margin_bottom = 337.0
+margin_bottom = 358.0
+custom_fonts/font = SubResource( 2 )
 text = "Legend tells of a floating island high in the skies held up by a magical crystal. It is said that the crystal holds immesurable power. Power that can alter the very land itself.
 
 The island is real.
-
 And the island is in danger.
 
 Shadow beings have started appearing on the island attempting to steal the power of the crystal. Stolen of its power, the crystal will no longer be able to maintain the shape of the land. The whole island will shift and change as the crystal becomes more unstable.
@@ -112,3 +254,10 @@ It is the duty of the Crystal Guardians to protect the crystal from those who se
 align = 1
 valign = 1
 autowrap = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Start"
+anims/FadeOut = SubResource( 3 )
+anims/Intro = SubResource( 4 )
+anims/Start = SubResource( 5 )
+anims/ToIntro = SubResource( 6 )
