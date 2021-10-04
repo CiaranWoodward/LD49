@@ -138,8 +138,24 @@ func _regen_chunk(x : int, z : int, displaceval) -> void:
 	var mc = get_chunk(x, z)
 	if is_instance_valid(mc):
 		mc.set_displacement(displaceval)
-	
-var othernode = null
+
+var prevfrom = null
+var prevto = null
+var prevresult = []
+# get a vector path for moving between two meshchunks, returns empty list if impossible
+func get_vec_path(from, to):
+	#caching
+	if from == prevfrom and to == prevto:
+		return prevresult
+	prevfrom = from
+	prevto = to
+	var pp = astarmap.get_id_path(from.id, to.id)
+	var list = []
+	for id in pp:
+		list.append(id2chunk[id].get_platform_pos() + Vector3(0, 1, 0))
+	prevresult = list
+	return list
+
 var prevselected = null
 func _physics_process(delta: float) -> void:
 	while len(Global.unhandled_input_queue) > 0:
@@ -148,21 +164,18 @@ func _physics_process(delta: float) -> void:
 		if (event is InputEventMouseButton) and (event.button_index == BUTTON_LEFT) and (!event.pressed):
 			var scenery = $Camera.get_scenery_at_point(event.position)
 			if is_instance_valid(scenery):
-				if !is_instance_valid(othernode):
-					othernode = scenery
-				else:
-					print(astarmap.get_point_connections(othernode.id))
-					var pp = astarmap.get_id_path(othernode.id, scenery.id)
-					var list = []
-					for id in pp:
-						list.append(id2chunk[id].get_platform_pos() + Vector3(0, 1, 0))
-					$LineRenderer.points = list
-					othernode = null
+				pass# TODO: Trigger move
 		if (event is InputEventMouseMotion):
 			if is_instance_valid(prevselected):
 				prevselected.set_selected(false)
 			prevselected = $Camera.get_scenery_at_point(event.position)
 			if is_instance_valid(prevselected):
 				prevselected.set_selected(true)
+				if Global.selected_skill == Global.SkillType.MoveMelee or Global.selected_skill == Global.SkillType.MoveRanged:
+					$LineRenderer.visible = true
+					var path = get_vec_path(Global.selected_player.map_chunk, prevselected)
+					$LineRenderer.points = path
+				else:
+					$LineRenderer.visible = false
 		if event.is_action_pressed("ui_cancel"):
 			Global.selected_player = null

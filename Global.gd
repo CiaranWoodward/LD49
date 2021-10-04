@@ -37,6 +37,8 @@ func _ready() -> void:
 func _set_selected_player(new):
 	selected_player = new
 	emit_signal("player_selected", players.find(new), new)
+	if !is_instance_valid(new):
+		_set_selected_skill(SkillType.None)
 
 func _set_selected_skill(new):
 	selected_skill = new
