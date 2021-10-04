@@ -51,6 +51,7 @@ var hud = null
 var players = []
 var enemies = []
 var enemy_iterator = 0
+var map_countdown = 2
 var paused = true setget _set_paused
 
 var selected_player = null setget _set_selected_player
@@ -90,6 +91,13 @@ func _set_gamestate(new):
 	if current_gamestate == GameState.EnemyTurn:
 		enemy_iterator = 0
 		next_enemy()
+	if current_gamestate == GameState.MapTurn:
+		if map_countdown == 0:
+			map_countdown = (randi() % 3) + 1
+			map._regen_map()
+		else:
+			map_countdown -= 1
+			call_deferred("regen_done")
 	emit_signal("gamestate_changed", new)
 
 func _set_movecost(new):
@@ -117,6 +125,10 @@ func add_player(new_player):
 
 func add_enemy(new_enemy):
 	enemies.append(new_enemy)
+
+func regen_done():
+	if current_gamestate == GameState.MapTurn:
+		_set_gamestate(GameState.PlayerTurn)
 
 func is_move_skill_selected():
 	return (selected_skill == SkillType.MoveMelee or selected_skill == SkillType.MoveRanged)

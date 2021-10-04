@@ -36,6 +36,7 @@ func is_enemy():
 
 func _handle_enemy_changed(enemy):
 	if enemy == self:
+		ap = max_ap
 		if !Global.is_adjacent(map_chunk.x, 0, map_chunk.z, 0):
 			var target = Global.map.get_unoccupied_crystal_space()
 			var path = Global.map.get_mc_path(map_chunk, target)
@@ -47,6 +48,9 @@ func _handle_enemy_changed(enemy):
 				path.resize(max_dist)
 			while path.back().is_occupied():
 				path.pop_back()
+				if len(path) == 0:
+					Global.next_enemy()
+					return
 			move(path, get_path_cost(path))
 		else:
 			_handle_attacking()

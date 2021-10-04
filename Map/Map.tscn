@@ -110,3 +110,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -59.3541, 0 )
 stream = ExtResource( 13 )
 volume_db = -10.0
 autoplay = true
+
+[node name="Tween" type="Tween" parent="."]

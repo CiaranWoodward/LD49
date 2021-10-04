@@ -70,6 +70,11 @@ func _regen_map() -> void:
 			_regen_chunk(x, z, noise.get_noise_2d(x, z))
 	_set_crystal()
 	_generate_navmesh()
+	$Tween.interpolate_callback(self, 1.5, "_regen_done")
+	$Tween.start()
+
+func _regen_done():
+	Global.regen_done()
 
 func _initial_mapgen() -> void:
 	var noise = OpenSimplexNoise.new()
@@ -86,6 +91,8 @@ func _initial_mapgen() -> void:
 		for z in range(-radius, radius+1):
 			_gen_chunk(x, z, noise.get_noise_2d(x, z))
 	_set_crystal()
+	$Tween.interpolate_callback(self, 1.5, "_regen_done")
+	$Tween.start()
 
 func _generate_navmesh() -> void:
 	astarmap.clear()
