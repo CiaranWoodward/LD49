@@ -36,8 +36,6 @@ func _handle_player_selected(_id, player):
 		map_chunk.set_selected(Global.SelectMask.PLAYER_ON)
 
 func is_move_valid(pathf, cost) -> bool:
-	if pathf.front() == map_chunk:
-		pathf.pop_front()
 	if cost > ap:
 		return false
 	if len(pathf) == 0:
@@ -47,6 +45,8 @@ func is_move_valid(pathf, cost) -> bool:
 	return true
 
 func move(pathf, cost) -> bool:
+	if pathf.front() == map_chunk:
+		pathf.pop_front()
 	if !is_move_valid(pathf, cost):
 		return false
 	ap -= cost

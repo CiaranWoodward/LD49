@@ -2,7 +2,7 @@
 
 [resource]
 flags_do_not_receive_shadows = true
-albedo_color = Color( 0.929412, 0.756863, 0.168627, 1 )
+albedo_color = Color( 1, 0.8, 0.2, 1 )
 emission_enabled = true
 emission = Color( 0.870588, 0.839216, 0.776471, 1 )
 emission_energy = 0.05

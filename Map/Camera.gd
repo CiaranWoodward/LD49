@@ -24,20 +24,30 @@ var zoom = 1.0
 var target_zoom = 1.0
 var target_lookat_point = Vector3.ZERO
 var lookat_point = Vector3.ZERO
+var focus_player = false
+var focussing_player = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.connect("player_selected", self, "_player_selected")
+	tween.connect("tween_completed", self, "_tween_completed")
 
 func _player_selected(id, player):
 	if is_instance_valid(player):
 		target_lookat_point = player.translation
+		focus_player = true
 	else:
 		target_lookat_point = Vector3.ZERO
+		focus_player = false
+		focussing_player = false
 	if target_lookat_point != lookat_point:
 		tween.remove(self, "lookat_point")
 		tween.interpolate_property(self, "lookat_point", lookat_point, target_lookat_point, 0.1, Tween.TRANS_SINE, Tween.EASE_OUT)
 		tween.start()
+
+func _tween_completed(object, key):
+	if object == self and key == ":lookat_point" and focus_player:
+		focussing_player = true
 
 func _unhandled_input(event):
 	Global.unhandled_input_queue.append(event)
@@ -80,6 +90,10 @@ func _bound_level():
 		height = MIN_HEIGHT
 	if height > MAX_HEIGHT:
 		height = MAX_HEIGHT
+	
+	if focussing_player and is_instance_valid(Global.selected_player):
+		# If we're not panning to player, then follow them
+		lookat_point = Global.selected_player.translation
 	
 	var camdist = distance - zoom
 	self.translation = Vector3(cos(angle) * camdist, height, sin(angle) * camdist) + lookat_point

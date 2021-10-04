@@ -166,16 +166,19 @@ func get_mc_path(from, to):
 		list.append(id2chunk[id])
 	return list
 
+func _update_annotation_color(newcolor):
+	if annotationMaterial.albedo_color != newcolor:
+		annotationMaterial.albedo_color = newcolor
+
 func _reset_annotation_color():
-	annotationMaterial.albedo_color = Color(1, 0.8, 0.2)
+	_update_annotation_color(Color(1, 0.8, 0.2))
 
 func _set_move_annotation_color(path, cost):
 	var valid = Global.selected_player.is_move_valid(path, cost)
 	if valid:
 		_reset_annotation_color()
 	else:
-		annotationMaterial.albedo_color = Color(1, 0, 0)
-	
+		_update_annotation_color(Color(1, 0, 0))
 
 var prevselected = null
 func _physics_process(delta: float) -> void:
@@ -198,6 +201,7 @@ func _physics_process(delta: float) -> void:
 					var path = get_vec_path(Global.selected_player.map_chunk, prevselected)
 					$LineRenderer.points = path
 					Global.current_movecost = ceil(len(path) / Global.selected_player.speed)
+					_set_move_annotation_color(path, Global.current_movecost)
 				else:
 					$LineRenderer.visible = false
 		if event.is_action_pressed("ui_cancel"):
