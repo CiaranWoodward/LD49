@@ -25,6 +25,10 @@ enum GameState {
 	PlayerTurn, EnemyTurn, MapTurn
 }
 
+enum PlayerState {
+	Idle, Moving, Attacking
+}
+
 enum GolemType { Melee, Ranged }
 
 var unhandled_input_queue = []
@@ -55,12 +59,15 @@ func _set_gamestate(new):
 	current_gamestate = new
 	emit_signal("gamestate_changed", new)
 
-func add_player(new_player):
-	players.append(new_player)
-	emit_signal("players_modified")
-
 func _set_movecost(new):
 	if new == current_movecost:
 		return
 	current_movecost = new
 	emit_signal("movecost_calculated", new)
+
+func add_player(new_player):
+	players.append(new_player)
+	emit_signal("players_modified")
+
+func is_move_skill_selected():
+	return (selected_skill == SkillType.MoveMelee or selected_skill == SkillType.MoveRanged)

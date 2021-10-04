@@ -9,6 +9,8 @@ var map_chunk = null
 var id = 0
 var ap = max_ap
 var selected = false
+var state = Global.PlayerState.Idle
+var path = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,6 +25,18 @@ func _handle_player_selected(_id, player):
 	if !selected && player == self:
 		selected = true
 		map_chunk.set_selected(Global.SelectMask.PLAYER_ON)
+
+func move(pathf, cost) -> bool:
+	if cost > ap:
+		return false
+	if state != Global.PlayerState.Idle:
+		return false
+	ap -= cost
+	state = Global.PlayerState.Moving
+	self.path = pathf
+	# TODO: Follow the path, then unset state
+	Global.selected_skill = Global.SkillType.None
+	return true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
