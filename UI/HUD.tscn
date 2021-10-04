@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://UI/PlayerStats.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Graphics/UI/White0000.png" type="Texture" id=2]
+[ext_resource path="res://UI/CrystalStability.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Graphics/UI/Icons/Crater0000.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/UI/Icons/CraterHover0000.png" type="Texture" id=4]
 [ext_resource path="res://Graphics/UI/Icons/RaiseHover0000.png" type="Texture" id=5]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Graphics/UI/Icons/MeleeHover0000.png" type="Texture" id=7]
 [ext_resource path="res://Graphics/UI/Icons/Melee0000.png" type="Texture" id=8]
 [ext_resource path="res://UI/SkillPopUp.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Graphics/UI/Frame0000.png" type="Texture" id=10]
 [ext_resource path="res://Graphics/UI/Icons/RangedHover0000.png" type="Texture" id=11]
 [ext_resource path="res://Graphics/UI/Icons/Ranged0000.png" type="Texture" id=12]
 [ext_resource path="res://Graphics/UI/Icons/MoveHover0000.png" type="Texture" id=13]
@@ -22,10 +21,56 @@
 [ext_resource path="res://UI/ActionBar.gd" type="Script" id=20]
 [ext_resource path="res://UI/HUD.gd" type="Script" id=21]
 
+[sub_resource type="Animation" id=1]
+resource_name = "FadeIn"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("root:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1.41421, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("root:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Start"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("root:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 21 )
 
 [node name="root" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = -0.00130355
 anchor_right = 0.998696
 anchor_bottom = 1.0
@@ -105,7 +150,8 @@ texture_pressed = ExtResource( 19 )
 texture_hover = ExtResource( 13 )
 
 [node name="MoveMelee" type="TextureButton" parent="root/ActionBar"]
-margin_right = 80.0
+margin_left = 90.0
+margin_right = 170.0
 margin_bottom = 80.0
 toggle_mode = true
 texture_normal = ExtResource( 14 )
@@ -113,8 +159,8 @@ texture_pressed = ExtResource( 19 )
 texture_hover = ExtResource( 13 )
 
 [node name="Melee" type="TextureButton" parent="root/ActionBar"]
-margin_left = 90.0
-margin_right = 170.0
+margin_left = 180.0
+margin_right = 260.0
 margin_bottom = 80.0
 toggle_mode = true
 texture_normal = ExtResource( 8 )
@@ -122,8 +168,8 @@ texture_pressed = ExtResource( 17 )
 texture_hover = ExtResource( 7 )
 
 [node name="Ranged" type="TextureButton" parent="root/ActionBar"]
-margin_left = 180.0
-margin_right = 260.0
+margin_left = 270.0
+margin_right = 350.0
 margin_bottom = 80.0
 toggle_mode = true
 texture_normal = ExtResource( 12 )
@@ -131,8 +177,8 @@ texture_pressed = ExtResource( 18 )
 texture_hover = ExtResource( 11 )
 
 [node name="Raise" type="TextureButton" parent="root/ActionBar"]
-margin_left = 270.0
-margin_right = 350.0
+margin_left = 360.0
+margin_right = 440.0
 margin_bottom = 80.0
 toggle_mode = true
 texture_normal = ExtResource( 6 )
@@ -140,8 +186,8 @@ texture_pressed = ExtResource( 15 )
 texture_hover = ExtResource( 5 )
 
 [node name="Crater" type="TextureButton" parent="root/ActionBar"]
-margin_left = 360.0
-margin_right = 440.0
+margin_left = 450.0
+margin_right = 530.0
 margin_bottom = 80.0
 toggle_mode = true
 action_mode = 0
@@ -149,38 +195,14 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 4 )
 
-[node name="CrystalStability" type="TextureProgress" parent="root"]
+[node name="CrystalStability" parent="root" instance=ExtResource( 2 )]
 anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -110.0
+anchor_bottom = 0.0
+margin_left = -420.0
 margin_top = 10.0
 margin_right = -10.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 100, 50 )
-texture_under = ExtResource( 2 )
-texture_over = ExtResource( 10 )
-texture_progress = ExtResource( 2 )
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NinePatchRect" type="NinePatchRect" parent="root"]
-visible = false
-margin_left = 731.645
-margin_top = 378.115
-margin_right = 1171.65
-margin_bottom = 511.115
-rect_min_size = Vector2( 200, 100 )
-texture = ExtResource( 10 )
-region_rect = Rect2( 0, 0, 500, 400 )
-patch_margin_left = 27
-patch_margin_top = 25
-patch_margin_right = 29
-patch_margin_bottom = 29
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 80.0
+grow_horizontal = 0
 
 [node name="SkillPopUp" parent="root" instance=ExtResource( 9 )]
 visible = false
@@ -192,3 +214,8 @@ margin_left = -210.488
 margin_top = -143.973
 margin_right = -10.4882
 margin_bottom = -23.9729
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Start"
+anims/FadeIn = SubResource( 1 )
+anims/Start = SubResource( 2 )

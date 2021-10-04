@@ -38,6 +38,7 @@ var unhandled_input_queue = []
 var map = null
 var hud = null
 var players = []
+var paused = true
 
 var selected_player = null setget _set_selected_player
 var selected_skill = SkillType.None setget _set_selected_skill

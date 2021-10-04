@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Map/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Map/Map.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Characters/BabyShadow.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Map/Crystal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Map/AnnotationMaterial.tres" type="Material" id=11]
+[ext_resource path="res://UI/StartScreen.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sound/Music.wav" type="AudioStream" id=13]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.662745, 0.866667, 1, 1 )
@@ -50,6 +52,8 @@ script = ExtResource( 2 )
 period = 10.0
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="StartScreen" parent="." instance=ExtResource( 12 )]
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.919561, 0.392947, 0, -0.392947, 0.919561, -2.81675, 25.7026, 101.771 )
@@ -100,4 +104,9 @@ material_override = ExtResource( 11 )
 cast_shadow = 0
 
 [node name="Crystal" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.2925, 35.4886, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71161, 19.9625, -0.198647 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = -10.0
+autoplay = true
