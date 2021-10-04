@@ -37,16 +37,26 @@ func _ready() -> void:
 	_reset_annotation_color()
 
 func _set_crystal():
-	var heightsum = 0
+	var heightmax = 0
 	for xi in [-1, 0, 1]:
 		for zi in [-1, 0, 1]:
-			heightsum += get_chunk(xi, zi).plat_height
-	heightsum /= 9.0
+			heightmax = max(get_chunk(xi, zi).plat_height, heightmax)
 	for xi in [-1, 0, 1]:
 		for zi in [-1, 0, 1]:
-			get_chunk(xi, zi).set_exact_displacement(heightsum)
+			get_chunk(xi, zi).set_exact_displacement(heightmax)
 	$Crystal.map_chunk = get_chunk(0, 0)
 	get_chunk(0, 0).occupant = $Crystal
+
+func get_unoccupied_crystal_space():
+	var possibles = []
+	for xi in [-1, 0, 1]:
+		for zi in [-1, 0, 1]:
+			var mc = get_chunk(xi, zi)
+			if is_instance_valid(mc) and !mc.is_occupied():
+				possibles.push_back(mc)
+	if len(possibles) == 0:
+		return null
+	return possibles[randi() % len(possibles)]
 
 func _regen_map() -> void:
 	var noise = OpenSimplexNoise.new()
@@ -145,6 +155,8 @@ func _gen_chunk(x : int, z : int, displaceval) -> void:
 	add_child(mc)
 	mc.set_displacement(displaceval)
 	mc.id = id_count
+	mc.x = x
+	mc.z = z
 	if dist > (radius - 1):
 		mapedgeset.append(mc)
 	id2chunk[id_count] = mc
@@ -171,7 +183,7 @@ func get_mc_path(from, to):
 	prevfrom = from
 	prevto = to
 	prevresult = list
-	return list
+	return list.duplicate()
 
 func get_vec_path(from, to):
 	var path = get_mc_path(from, to)

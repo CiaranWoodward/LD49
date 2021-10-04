@@ -14,6 +14,8 @@ var visual_height_offset : float = 0
 
 # For the A* algorithm tracking
 var id = 0
+var x = 0
+var z = 0
 
 var occupant = null
 var selected_mask = 0
@@ -25,6 +27,9 @@ func _ready() -> void:
 
 func is_scenery():
 	return true
+
+func is_occupied() -> bool:
+	return is_instance_valid(occupant)
 
 func _regenerate_mesh() -> void:
 	var cm = CubeMesh.new()

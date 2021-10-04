@@ -27,6 +27,7 @@ onready var stateMachine : AnimationNodeStateMachinePlayback = animTree["paramet
 func _ready() -> void:
 	add_child(tween)
 	Global.add_enemy(self)
+	Global.connect("enemy_selected", self, "_handle_enemy_changed")
 	animTree.active = true
 	stateMachine.start("Spawn")
 
@@ -34,7 +35,27 @@ func is_enemy():
 	return true
 
 func _handle_enemy_changed(enemy):
-	pass
+	if enemy == self:
+		if !Global.is_adjacent(map_chunk.x, 0, map_chunk.z, 0):
+			var target = Global.map.get_unoccupied_crystal_space()
+			var path = Global.map.get_mc_path(map_chunk, target)
+			if len(path) == 0:
+				Global.next_enemy()
+				return
+			var max_dist = get_max_path_len_for_cost(ap)
+			if max_dist < len(path):
+				path.resize(max_dist)
+			while path.back().is_occupied():
+				path.pop_back()
+			move(path, get_path_cost(path))
+		else:
+			_handle_attacking()
+
+func get_max_path_len_for_cost(cost):
+	return cost * speed
+
+func get_path_cost(path):
+	return ceil(len(path) / speed)
 
 func is_move_valid(pathf, cost) -> bool:
 	if cost > ap:
@@ -62,6 +83,11 @@ func move(pathf, cost) -> bool:
 	_animate_nextstep(true)
 	return true
 
+func _handle_attacking():
+	if Global.is_adjacent(map_chunk.x, 0, map_chunk.z, 0):
+		pass # TODO: Attack crystal
+	Global.next_enemy()
+
 func _animate_nextstep(first = false):
 	print("animating next step")
 	var trans = Tween.TRANS_LINEAR
@@ -80,6 +106,7 @@ func _animate_nextstep(first = false):
 func _animate_nextstep_done():
 	if len(path) == 0:
 		_change_state(Global.EnemyState.Idle)
+		_handle_attacking()
 	else:
 		_animate_nextstep()
 

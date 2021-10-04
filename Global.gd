@@ -106,6 +106,11 @@ func next_enemy():
 		enemy_iterator += 1
 		emit_signal("enemy_selected", selected_enemy)
 
+func is_adjacent(x1, z1, x2, z2):
+	if abs(x1 - x2) <= 1 and abs(z1 - z2) <= 1:
+		return true
+	return false
+
 func add_player(new_player):
 	players.append(new_player)
 	emit_signal("players_modified")
