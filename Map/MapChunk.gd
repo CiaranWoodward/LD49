@@ -52,12 +52,16 @@ func _set_visual_relative_height(rel_height):
 
 # Displace by a value in the range [-1, 1]
 func set_displacement(displace : float, tweentime : float = 1.5):
+	set_exact_displacement(displace * height, tweentime)
+
+func set_exact_displacement(displace, tweentime : float = 1.5):
 	var old_plat_height = self.plat_height
-	self.plat_height = (displace * height)
+	self.plat_height = displace
 	var plat_height_diff = old_plat_height - plat_height
 	self.translation.y = plat_height - (height/2)
 	tweentime *= rand_range(0.9, 1.1)
 	_set_visual_relative_height(plat_height_diff)
+	$Tween.stop(self, "_set_visual_relative_height")
 	$Tween.interpolate_method(self, "_set_visual_relative_height", plat_height_diff, 0, tweentime, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
 	$Tween.start()
 

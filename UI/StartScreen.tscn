@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Graphics/UI/Frame0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/UI/PlayHover0000.png" type="Texture" id=2]
 [ext_resource path="res://Graphics/UI/Play0000.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/UI/Title0000.png" type="Texture" id=4]
 [ext_resource path="res://UI/Ubuntu-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://UI/StartScreen.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -94,6 +95,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Intro:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Start:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Start"
@@ -145,7 +170,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, true ]
+"values": [ false, false ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Start:visible")
@@ -187,6 +212,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Intro:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Start:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=7]
 animation = "FadeOut"
@@ -223,8 +272,11 @@ graph_offset = Vector2( 136, 21 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
 [node name="StartScreen" type="CanvasLayer"]
+script = ExtResource( 6 )
 
 [node name="Start" type="Control" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.00452
@@ -269,9 +321,8 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -340.5
-margin_top = 6.71533
 margin_right = 340.5
-margin_bottom = 304.715
+margin_bottom = 298.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource( 4 )
@@ -279,9 +330,10 @@ expand = true
 stretch_mode = 6
 
 [node name="Intro" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -310,6 +362,7 @@ margin_left = 15.0
 margin_top = 15.0
 margin_right = -15.0
 margin_bottom = -15.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -317,6 +370,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="Intro/Intro/MarginContainer"]
 margin_right = 370.0
 margin_bottom = 370.0
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="Intro/Intro/MarginContainer/VBoxContainer"]
 margin_right = 370.0
@@ -333,7 +387,7 @@ margin_top = 41.0
 margin_right = 370.0
 margin_bottom = 358.0
 custom_fonts/font = SubResource( 2 )
-text = "Legend tells of a floating island high in the skies held up by a magical crystal. It is said that the crystal holds immesurable power. Power that can alter the very land itself.
+text = "Legend tells of a floating island high in the skies held up by a magical crystal. It is said that the crystal holds immeasurable power. Power that can alter the very land itself.
 
 The island is real.
 And the island is in danger.
@@ -356,3 +410,6 @@ anims/ToIntro = SubResource( 6 )
 tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 15 )
+
+[connection signal="pressed" from="Start/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="gui_input" from="Intro" to="." method="_on_Intro_gui_input"]

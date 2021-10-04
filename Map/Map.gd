@@ -36,6 +36,17 @@ func _ready() -> void:
 	Global.map = self
 	_reset_annotation_color()
 
+func _set_crystal():
+	var heightsum = 0
+	for xi in [-1, 0, 1]:
+		for zi in [-1, 0, 1]:
+			heightsum += get_chunk(xi, zi).plat_height
+	heightsum /= 9.0
+	for xi in [-1, 0, 1]:
+		for zi in [-1, 0, 1]:
+			get_chunk(xi, zi).set_exact_displacement(heightsum)
+	$Crystal.map_chunk = get_chunk(0, 0)
+
 func _regen_map() -> void:
 	var noise = OpenSimplexNoise.new()
 	noise.seed = randi()
@@ -46,6 +57,7 @@ func _regen_map() -> void:
 	for x in range(-radius, radius+1):
 		for z in range(-radius, radius+1):
 			_regen_chunk(x, z, noise.get_noise_2d(x, z))
+	_set_crystal()
 	_generate_navmesh()
 
 func _initial_mapgen() -> void:
@@ -62,6 +74,7 @@ func _initial_mapgen() -> void:
 	for x in range(-radius, radius+1):
 		for z in range(-radius, radius+1):
 			_gen_chunk(x, z, noise.get_noise_2d(x, z))
+	_set_crystal()
 
 func _generate_navmesh() -> void:
 	astarmap.clear()

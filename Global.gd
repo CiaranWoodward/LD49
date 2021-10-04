@@ -6,6 +6,7 @@ signal skill_selected(id)
 signal gamestate_changed(newstate)
 signal players_modified()
 signal movecost_calculated(newcost)
+signal paused_changed(newstate)
 
 enum CollisionLayer {
 	SCENERY = 1<<0,
@@ -38,7 +39,7 @@ var unhandled_input_queue = []
 var map = null
 var hud = null
 var players = []
-var paused = true
+var paused = true setget _set_paused
 
 var selected_player = null setget _set_selected_player
 var selected_skill = SkillType.None setget _set_selected_skill
@@ -48,6 +49,10 @@ var current_movecost = 0 setget _set_movecost
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+
+func _set_paused(new):
+	paused = new
+	emit_signal("paused_changed", paused)
 
 func _set_selected_player(new):
 	selected_player = new
