@@ -52,6 +52,7 @@ var players = []
 var enemies = []
 var enemy_iterator = 0
 var map_countdown = 2
+var crystal_health : int = 100
 var paused = true setget _set_paused
 
 var selected_player = null setget _set_selected_player
