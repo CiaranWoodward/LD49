@@ -30,5 +30,5 @@ func _global_player_selected(id, player):
 		$Border.visible = false
 
 func _stat_update():
-	$HBoxContainer/AP/Label.text = str(my_golem.ap) + "/" + str(my_golem.max_ap)
-	$HBoxContainer/Health/Label.text = str(my_golem.health) + "/" + str(my_golem.max_health)
+	$HBoxContainer/AP/VBox/Label.text = str(my_golem.ap) + "/" + str(my_golem.max_ap)
+	$HBoxContainer/Health/VBox/Label.text = str(my_golem.health) + "/" + str(my_golem.max_health)

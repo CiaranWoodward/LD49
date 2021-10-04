@@ -83,7 +83,7 @@ margin_top = 37.0
 margin_right = 174.0
 margin_bottom = 56.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.980392, 0, 1 )
+custom_colors/font_color = Color( 0, 1, 0.152941, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Costs 1 action point"
 align = 1
@@ -142,7 +142,7 @@ margin_top = 37.0
 margin_right = 174.0
 margin_bottom = 56.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.980392, 0, 1 )
+custom_colors/font_color = Color( 0, 1, 0.152941, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Costs 1 action point"
 align = 1
@@ -177,11 +177,11 @@ __meta__ = {
 
 [node name="Ranged" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 visible = false
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 128.0
 
 [node name="SkillName" type="Label" parent="NinePatchRect/MarginContainer/Ranged"]
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.584314, 0.815686, 0.937255, 1 )
@@ -192,17 +192,17 @@ valign = 1
 
 [node name="Line" type="NinePatchRect" parent="NinePatchRect/MarginContainer/Ranged"]
 margin_top = 32.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 
 [node name="Cost" type="Label" parent="NinePatchRect/MarginContainer/Ranged"]
 margin_top = 37.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 56.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.980392, 0, 1 )
+custom_colors/font_color = Color( 0, 1, 0.152941, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Costs 1 action point"
 align = 1
@@ -213,7 +213,7 @@ __meta__ = {
 
 [node name="SkillDescription" type="Label" parent="NinePatchRect/MarginContainer/Ranged"]
 margin_top = 60.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 97.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.890196, 0.94902, 1, 1 )
@@ -225,11 +225,11 @@ autowrap = true
 
 [node name="Melee" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 visible = false
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 128.0
 
 [node name="SkillName" type="Label" parent="NinePatchRect/MarginContainer/Melee"]
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.584314, 0.815686, 0.937255, 1 )
@@ -240,17 +240,17 @@ valign = 1
 
 [node name="Line" type="NinePatchRect" parent="NinePatchRect/MarginContainer/Melee"]
 margin_top = 32.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 
 [node name="Cost" type="Label" parent="NinePatchRect/MarginContainer/Melee"]
 margin_top = 37.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 56.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.980392, 0, 1 )
+custom_colors/font_color = Color( 0, 1, 0.152941, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Costs 1 action point"
 align = 1
@@ -261,7 +261,7 @@ __meta__ = {
 
 [node name="SkillDescription" type="Label" parent="NinePatchRect/MarginContainer/Melee"]
 margin_top = 60.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 97.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -273,11 +273,11 @@ autowrap = true
 
 [node name="MoveRanged" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 visible = false
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 128.0
 
 [node name="SkillName" type="Label" parent="NinePatchRect/MarginContainer/MoveRanged"]
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.584314, 0.815686, 0.937255, 1 )
@@ -288,17 +288,17 @@ valign = 1
 
 [node name="Line" type="NinePatchRect" parent="NinePatchRect/MarginContainer/MoveRanged"]
 margin_top = 32.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 
 [node name="Cost" type="Label" parent="NinePatchRect/MarginContainer/MoveRanged"]
 margin_top = 37.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 56.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.980392, 0, 1 )
+custom_colors/font_color = Color( 0, 1, 0.152941, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Costs 1 action point"
 align = 1
@@ -310,7 +310,7 @@ __meta__ = {
 
 [node name="Flavour" type="Label" parent="NinePatchRect/MarginContainer/MoveRanged"]
 margin_top = 60.0
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 101.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -325,7 +325,7 @@ __meta__ = {
 
 [node name="MoveMelee" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 visible = false
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 128.0
 
 [node name="SkillName" type="Label" parent="NinePatchRect/MarginContainer/MoveMelee"]
@@ -350,7 +350,7 @@ margin_top = 37.0
 margin_right = 174.0
 margin_bottom = 56.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 1, 0.980392, 0, 1 )
+custom_colors/font_color = Color( 0, 1, 0.152941, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Costs 1 action point"
 align = 1
@@ -377,11 +377,11 @@ __meta__ = {
 
 [node name="BabyShadow" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 visible = false
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 128.0
 
 [node name="SkillName" type="Label" parent="NinePatchRect/MarginContainer/BabyShadow"]
-margin_right = 174.0
+margin_right = 170.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.584314, 0.815686, 0.937255, 1 )
@@ -392,14 +392,14 @@ valign = 1
 
 [node name="Line" type="NinePatchRect" parent="NinePatchRect/MarginContainer/BabyShadow"]
 margin_top = 32.0
-margin_right = 174.0
+margin_right = 170.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 
 [node name="SkillDescription" type="Label" parent="NinePatchRect/MarginContainer/BabyShadow"]
 margin_top = 37.0
-margin_right = 174.0
+margin_right = 170.0
 margin_bottom = 94.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -411,7 +411,7 @@ autowrap = true
 
 [node name="Behaviour" type="Label" parent="NinePatchRect/MarginContainer/BabyShadow"]
 margin_top = 98.0
-margin_right = 174.0
+margin_right = 170.0
 margin_bottom = 115.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
@@ -423,11 +423,11 @@ autowrap = true
 
 [node name="RangedShadow" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
 visible = false
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 128.0
 
 [node name="SkillName" type="Label" parent="NinePatchRect/MarginContainer/RangedShadow"]
-margin_right = 174.0
+margin_right = 170.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.584314, 0.815686, 0.937255, 1 )
@@ -438,14 +438,14 @@ valign = 1
 
 [node name="Line" type="NinePatchRect" parent="NinePatchRect/MarginContainer/RangedShadow"]
 margin_top = 32.0
-margin_right = 174.0
+margin_right = 170.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 
 [node name="SkillDescription" type="Label" parent="NinePatchRect/MarginContainer/RangedShadow"]
 margin_top = 37.0
-margin_right = 174.0
+margin_right = 170.0
 margin_bottom = 74.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -457,7 +457,7 @@ autowrap = true
 
 [node name="Behaviour" type="Label" parent="NinePatchRect/MarginContainer/RangedShadow"]
 margin_top = 78.0
-margin_right = 174.0
+margin_right = 170.0
 margin_bottom = 95.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
@@ -468,8 +468,7 @@ valign = 1
 autowrap = true
 
 [node name="MeleeShadow" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
-visible = false
-margin_right = 170.0
+margin_right = 174.0
 margin_bottom = 128.0
 
 [node name="SkillName" type="Label" parent="NinePatchRect/MarginContainer/MeleeShadow"]
@@ -514,7 +513,8 @@ valign = 1
 autowrap = true
 
 [node name="EndTurn" type="VBoxContainer" parent="NinePatchRect/MarginContainer"]
-margin_right = 170.0
+visible = false
+margin_right = 174.0
 margin_bottom = 128.0
 
 [node name="SkillName" type="Label" parent="NinePatchRect/MarginContainer/EndTurn"]
