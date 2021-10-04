@@ -50,14 +50,15 @@ _data = {
 mode = 3
 
 [node name="SceneBillboard" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55691, 0 )
 scene = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.55691, 0 )
 shape = SubResource( 1 )
 
 [node name="OrbitPath" type="Path" parent="."]
-transform = Transform( 0.857068, 0.515203, 0, -0.515203, 0.857068, 0, 0, 0, 1, 1.29934, -0.492464, 0.266002 )
+transform = Transform( 0.857068, 0.515203, 0, -0.515203, 0.857068, 0, 0, 0, 1, 1.29934, 2.06444, 0.266002 )
 curve = SubResource( 2 )
 
 [node name="OrbitFollow" type="PathFollow" parent="OrbitPath"]
@@ -70,7 +71,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="OrbitPath2" type="Path" parent="."]
-transform = Transform( 0.997934, 0.0642536, 0, -0.0642536, 0.997934, 0, 0, 0, 1, -0.00720084, 0.281407, -2.00536 )
+transform = Transform( 0.997934, 0.0642536, 0, -0.0642536, 0.997934, 0, 0, 0, 1, -0.00720084, 2.83831, -2.00536 )
 curve = SubResource( 5 )
 
 [node name="OrbitFollow" type="PathFollow" parent="OrbitPath2"]
@@ -84,7 +85,7 @@ mesh = SubResource( 7 )
 material/0 = null
 
 [node name="OrbitPath3" type="Path" parent="."]
-transform = Transform( -0.0123833, -0.000797319, -0.999923, -0.0642536, 0.997934, 0, 0.997857, 0.0642487, -0.0124089, 2.00286, 0.281407, -0.0355066 )
+transform = Transform( -0.0123833, -0.000797319, -0.999923, -0.0642536, 0.997934, 0, 0.997857, 0.0642487, -0.0124089, 2.00286, 2.83831, -0.0355066 )
 curve = SubResource( 8 )
 
 [node name="OrbitFollow" type="PathFollow" parent="OrbitPath3"]
