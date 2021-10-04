@@ -29,7 +29,7 @@ enum SkillType {
 }
 
 enum GameState {
-	PlayerTurn, EnemyTurn, MapTurn, GameOver
+	PlayerTurn, EnemyTurn, MapTurn, GameOver, GameWin
 }
 
 enum PlayerState {
@@ -52,7 +52,7 @@ var hud = null
 var players = []
 var enemies = []
 var enemy_iterator = 0
-var map_countdown = 2
+var turn_counter = 0
 var crystal_health : int = 100
 var paused = true setget _set_paused
 
@@ -88,18 +88,79 @@ func _set_selected_skill(new):
 		_set_gamestate(GameState.EnemyTurn)
 	emit_signal("skill_selected", new)
 
+onready var babyscene = load("res://Characters/BabyShadow.tscn")
+onready var rangedscene = load("res://Characters/RangedShadow.tscn")
+onready var meleescene = load("res://Characters/MeleeShadow.tscn")
+
+func _spawn_baby(count):
+	for i in range(count):
+		var new = babyscene.instance()
+		map.add_child(new)
+
+func _spawn_ranged(count):
+	for i in range(count):
+		var new = rangedscene.instance()
+		map.add_child(new)
+
+func _spawn_melee(count):
+	for i in range(count):
+		var new = meleescene.instance()
+		map.add_child(new)
+
+func _handle_mapturn():
+	turn_counter += 1
+	# First handle map generation
+	match turn_counter:
+		2, 5, 6, 10, 14, 18, 20:
+			map._regen_map()
+		_:
+			call_deferred("regen_done")
+	# Now enemy spawning
+	match turn_counter:
+		1:
+			_spawn_baby(2)
+			_spawn_melee(1)
+			_spawn_ranged(0)
+		2:
+			_spawn_baby(1)
+			_spawn_melee(1)
+			_spawn_ranged(1)
+		6:
+			_spawn_baby(2)
+			_spawn_melee(1)
+			_spawn_ranged(1)
+		7:
+			_spawn_baby(1)
+			_spawn_melee(0)
+			_spawn_ranged(2)
+		10:
+			_spawn_baby(1)
+			_spawn_melee(1)
+			_spawn_ranged(0)
+		11:
+			_spawn_baby(0)
+			_spawn_melee(2)
+			_spawn_ranged(3)
+		12:
+			_spawn_baby(1)
+			_spawn_melee(0)
+			_spawn_ranged(2)
+		15:
+			_spawn_baby(4)
+			_spawn_melee(1)
+			_spawn_ranged(2)
+	if turn_counter > 15 and len(enemies) > 0:
+		_set_gamestate(GameState.GameWin)
+
 func _set_gamestate(new):
+	if current_gamestate == GameState.GameOver or current_gamestate == GameState.GameWin:
+		return
 	current_gamestate = new
 	if current_gamestate == GameState.EnemyTurn:
 		enemy_iterator = 0
 		next_enemy()
 	if current_gamestate == GameState.MapTurn:
-		if map_countdown == 0:
-			map_countdown = (randi() % 3) + 1
-			map._regen_map()
-		else:
-			map_countdown -= 1
-			call_deferred("regen_done")
+		_handle_mapturn()
 	emit_signal("gamestate_changed", new)
 
 func _set_movecost(new):

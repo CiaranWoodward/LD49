@@ -48,11 +48,13 @@ _data = {
 }
 
 [node name="RangedGolem" type="RigidBody"]
+collision_layer = 2050
 mode = 3
 script = ExtResource( 5 )
 
 [node name="SceneBillboard" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55691, 0 )
+output_size = Vector2( 7, 7 )
 scene = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]

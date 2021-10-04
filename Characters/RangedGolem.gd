@@ -19,7 +19,7 @@ var health = max_health
 var selected = false
 var state = Global.PlayerState.Idle
 var path = []
-var projectile_offset = Vector3(0, 2, 0)
+var projectile_offset = Vector3(0, 4, 0)
 
 onready var tween : Tween = Tween.new()
 onready var scene2d : Node2D = $SceneBillboard.scene2d

@@ -11,6 +11,7 @@ albedo_color = Color( 1, 0, 0, 1 )
 [sub_resource type="CapsuleShape" id=1]
 
 [node name="RangedShadow" type="RigidBody"]
+collision_layer = 4100
 mode = 3
 script = ExtResource( 3 )
 laserMaterial = SubResource( 2 )

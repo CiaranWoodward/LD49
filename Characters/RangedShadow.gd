@@ -21,13 +21,14 @@ var state = Global.EnemyState.Idle
 var target = Global.EnemyTarget.Crystal
 var target_chunk = null
 var path = []
-var projectile_offset = Vector3(0, 2, 0)
+var projectile_offset = Vector3(0, 4, 0)
 var laser
 
 onready var tween : Tween = Tween.new()
 onready var scene2d : Node2D = $SceneBillboard.scene2d
 onready var animTree : AnimationTree = scene2d.get_node("AnimationTree")
 onready var stateMachine : AnimationNodeStateMachinePlayback = animTree["parameters/StateMachine/playback"]
+onready var laserSound : AudioStreamPlayer = scene2d.get_node("Attack")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -79,7 +80,9 @@ func _can_hit(target) -> bool:
 func draw_laser(target):
 	laser.points = [target.translation + projectile_offset, translation + projectile_offset]
 	get_parent().add_child(laser)
+	laserSound.play()
 	tween.interpolate_callback(self, 1, "undraw_laser")
+	tween.start()
 
 func undraw_laser():
 	get_parent().remove_child(laser)

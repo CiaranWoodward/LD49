@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Map/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Map/Map.gd" type="Script" id=2]
@@ -6,14 +6,11 @@
 [ext_resource path="res://LineRenderer/LineRenderer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Characters/MeleeGolem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Characters/RangedGolem.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Characters/MeleeShadow.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Characters/RangedShadow.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Characters/BabyShadow.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Map/Crystal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Map/AnnotationMaterial.tres" type="Material" id=11]
 [ext_resource path="res://UI/StartScreen.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Sound/Music.wav" type="AudioStream" id=13]
-[ext_resource path="res://Characters/MeleeShadow.gd" type="Script" id=14]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.662745, 0.866667, 1, 1 )
@@ -96,13 +93,6 @@ transform = Transform( 0.999741, 0.0227397, 0, -0.0227397, 0.999741, 0, 0, 0, 1,
 [node name="MeleeGolem2" parent="." instance=ExtResource( 5 )]
 transform = Transform( 0.999741, 0.0227397, 0, -0.0227397, 0.999741, 0, 0, 0, 1, 55.3205, 1.52538, 19.3057 )
 
-[node name="RangedShadow" parent="." instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5501, 14.2128, 42.5109 )
-
-[node name="MeleeShadow" parent="." instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.8526, 16.3107, 42.447 )
-script = ExtResource( 14 )
-
 [node name="BabyShadow" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6569, 11.4114, 45.9793 )
 
@@ -112,7 +102,7 @@ material_override = ExtResource( 11 )
 cast_shadow = 0
 
 [node name="Crystal" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.9707, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.4282, 0 )
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )

@@ -434,7 +434,7 @@ states/Start/position = Vector2( 458, 162 )
 states/ToIntro/node = SubResource( 14 )
 states/ToIntro/position = Vector2( 622, 162 )
 transitions = [ "Start", "ToIntro", SubResource( 15 ), "Intro", "FadeOut", SubResource( 16 ), "ToIntro", "Intro", SubResource( 17 ) ]
-graph_offset = Vector2( 306, -47 )
+graph_offset = Vector2( 306, 100.55 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 

@@ -20,3 +20,5 @@ func _on_Intro_gui_input(event: InputEvent) -> void:
 func _handle_gamestate(newstate):
 	if newstate == Global.GameState.GameOver:
 		stateMachine.start("Fail")
+	if newstate == Global.GameState.GameWin:
+		stateMachine.start("End")

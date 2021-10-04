@@ -3,7 +3,7 @@ extends Spatial
 var damage = 0
 var target = null
 var speed = 30
-var offset = Vector3(0, 2, 0)
+var offset = Vector3(0, 4, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
