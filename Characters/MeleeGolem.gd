@@ -1,7 +1,10 @@
 extends RigidBody
 
+signal stats_changed
+
 export var move_animation_speed : float = 30.0
 export var max_ap : int = 10
+export var max_health : int = 10
 export var speed : float = 4.0
 
 const golem_type = Global.GolemType.Melee
@@ -9,6 +12,7 @@ const golem_type = Global.GolemType.Melee
 var map_chunk = null
 var id = 0
 var ap = max_ap
+var health = max_health
 var selected = false
 var state = Global.PlayerState.Idle
 var path = []
@@ -50,6 +54,7 @@ func move(pathf, cost) -> bool:
 	if !is_move_valid(pathf, cost):
 		return false
 	ap -= cost
+	emit_signal("stats_changed")
 	_change_state(Global.PlayerState.Moving)
 	self.path = pathf
 	_change_chunk(path.back())

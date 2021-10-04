@@ -21,9 +21,14 @@ func _evaluate_necessity():
 	else:
 		self.visible = true
 		my_golem = Global.players[golem_number]
+		my_golem.connect("stats_changed", self, "_stat_update")
 
 func _global_player_selected(id, player):
 	if id == golem_number:
 		$Border.visible = true
 	else:
 		$Border.visible = false
+
+func _stat_update():
+	$HBoxContainer/AP/Label.text = str(my_golem.ap) + "/" + str(my_golem.max_ap)
+	$HBoxContainer/Health/Label.text = str(my_golem.health) + "/" + str(my_golem.max_health)

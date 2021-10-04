@@ -79,7 +79,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Health2" type="NinePatchRect" parent="HBoxContainer"]
+[node name="AP" type="NinePatchRect" parent="HBoxContainer"]
 margin_left = 77.0
 margin_right = 147.0
 margin_bottom = 38.0
@@ -90,7 +90,7 @@ patch_margin_top = 19
 patch_margin_right = 15
 patch_margin_bottom = 19
 
-[node name="Label" type="Label" parent="HBoxContainer/Health2"]
+[node name="Label" type="Label" parent="HBoxContainer/AP"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = SubResource( 1 )
