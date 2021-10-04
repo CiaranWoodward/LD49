@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Graphics/MeleeShadow/LeftArm0000.png" type="Texture" id=1]
 [ext_resource path="res://Graphics/MeleeShadow/Smear0000.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Graphics/MeleeShadow/Body0000.png" type="Texture" id=5]
 [ext_resource path="res://Helper/ViewportCamera.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Characters/2d/ShadowParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sound/Enemy/Die.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sound/Enemy/Spawn.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BackAttack"
@@ -397,6 +399,18 @@ tracks/14/keys = {
 "transitions": PoolRealArray( 2, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Position2D/Die:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 2,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -1219,6 +1233,18 @@ tracks/14/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/15/type = "value"
+tracks/15/path = NodePath("Position2D/Spawn:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 2,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=8]
 length = 0.2
@@ -1437,37 +1463,33 @@ animation = "Hit"
 [sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Spawn"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "StartWalk"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Walking"
 
-[sub_resource type="AnimationNodeTimeScale" id=18]
+[sub_resource type="AnimationNodeTimeScale" id=19]
 
-[sub_resource type="AnimationNodeBlendTree" id=19]
-nodes/Animation/node = SubResource( 17 )
+[sub_resource type="AnimationNodeBlendTree" id=20]
+nodes/Animation/node = SubResource( 18 )
 nodes/Animation/position = Vector2( 280, 60 )
-nodes/TimeScale/node = SubResource( 18 )
+nodes/TimeScale/node = SubResource( 19 )
 nodes/TimeScale/position = Vector2( 480, 60 )
 nodes/output/position = Vector2( 700, 100 )
 node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 switch_mode = 2
@@ -1475,22 +1497,26 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
 switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=28]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=31]
+[sub_resource type="AnimationNodeStateMachine" id=33]
 states/BackAttack/node = SubResource( 10 )
 states/BackAttack/position = Vector2( 327, -93 )
 states/Die/node = SubResource( 11 )
@@ -1503,27 +1529,26 @@ states/Hit/node = SubResource( 14 )
 states/Hit/position = Vector2( 145, 276 )
 states/Idle/node = SubResource( 15 )
 states/Idle/position = Vector2( 327, 90 )
-states/Spawn/node = SubResource( 34 )
+states/Spawn/node = SubResource( 16 )
 states/Spawn/position = Vector2( 9.03201, 90 )
-states/StartWalk/node = SubResource( 16 )
+states/StartWalk/node = SubResource( 17 )
 states/StartWalk/position = Vector2( 508, -5 )
-states/Walk/node = SubResource( 19 )
+states/Walk/node = SubResource( 20 )
 states/Walk/position = Vector2( 669.032, 90 )
-transitions = [ "EndWalk", "Idle", SubResource( 20 ), "Idle", "StartWalk", SubResource( 21 ), "Idle", "BackAttack", SubResource( 22 ), "Idle", "FrontAttack", SubResource( 23 ), "BackAttack", "Idle", SubResource( 24 ), "FrontAttack", "Idle", SubResource( 25 ), "StartWalk", "Walk", SubResource( 26 ), "Walk", "EndWalk", SubResource( 27 ), "Idle", "Die", SubResource( 28 ), "Idle", "Hit", SubResource( 29 ), "Hit", "Idle", SubResource( 30 ), "Spawn", "Idle", SubResource( 35 ) ]
+transitions = [ "EndWalk", "Idle", SubResource( 21 ), "Idle", "StartWalk", SubResource( 22 ), "Idle", "BackAttack", SubResource( 23 ), "Idle", "FrontAttack", SubResource( 24 ), "BackAttack", "Idle", SubResource( 25 ), "FrontAttack", "Idle", SubResource( 26 ), "StartWalk", "Walk", SubResource( 27 ), "Walk", "EndWalk", SubResource( 28 ), "Idle", "Die", SubResource( 29 ), "Idle", "Hit", SubResource( 30 ), "Hit", "Idle", SubResource( 31 ), "Spawn", "Idle", SubResource( 32 ) ]
 graph_offset = Vector2( -456.968, -111 )
 
-[sub_resource type="AnimationNodeBlendTree" id=32]
-nodes/StateMachine/node = SubResource( 31 )
+[sub_resource type="AnimationNodeBlendTree" id=34]
+nodes/StateMachine/node = SubResource( 33 )
 nodes/StateMachine/position = Vector2( 440, 80 )
 nodes/output/position = Vector2( 800, 120 )
 node_connections = [ "output", 0, "StateMachine" ]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=35]
 
 [node name="MeleeGolem2d" type="Node2D"]
 
 [node name="Position2D" type="Position2D" parent="."]
-modulate = Color( 0.833333, 0.833333, 0.833333, 0.833333 )
 
 [node name="Head" type="Sprite" parent="Position2D"]
 position = Vector2( 0, -205 )
@@ -1555,6 +1580,12 @@ rotation = -0.665787
 z_index = -2
 texture = ExtResource( 2 )
 
+[node name="Die" type="AudioStreamPlayer" parent="Position2D"]
+stream = ExtResource( 8 )
+
+[node name="Spawn" type="AudioStreamPlayer" parent="Position2D"]
+stream = ExtResource( 9 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Spawn"
 anims/BackAttack = SubResource( 1 )
@@ -1568,9 +1599,9 @@ anims/StartWalk = SubResource( 8 )
 anims/Walking = SubResource( 9 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 32 )
+tree_root = SubResource( 34 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/StateMachine/playback = SubResource( 33 )
+parameters/StateMachine/playback = SubResource( 35 )
 parameters/StateMachine/Walk/TimeScale/scale = 3.0
 
 [node name="ViewportCamera" parent="." instance=ExtResource( 6 )]
