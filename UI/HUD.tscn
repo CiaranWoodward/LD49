@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://UI/PlayerStats.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/CrystalStability.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Graphics/UI/Icons/MeleeHover0000.png" type="Texture" id=7]
 [ext_resource path="res://Graphics/UI/Icons/Melee0000.png" type="Texture" id=8]
 [ext_resource path="res://UI/SkillPopUp.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Graphics/UI/Icons/Next0000.png" type="Texture" id=10]
 [ext_resource path="res://Graphics/UI/Icons/RangedHover0000.png" type="Texture" id=11]
 [ext_resource path="res://Graphics/UI/Icons/Ranged0000.png" type="Texture" id=12]
 [ext_resource path="res://Graphics/UI/Icons/MoveHover0000.png" type="Texture" id=13]
@@ -20,6 +21,7 @@
 [ext_resource path="res://Graphics/UI/Icons/MoveSelected0000.png" type="Texture" id=19]
 [ext_resource path="res://UI/ActionBar.gd" type="Script" id=20]
 [ext_resource path="res://UI/HUD.gd" type="Script" id=21]
+[ext_resource path="res://Graphics/UI/Icons/NextHover0000.png" type="Texture" id=22]
 
 [sub_resource type="Animation" id=1]
 resource_name = "FadeIn"
@@ -70,7 +72,6 @@ tracks/0/keys = {
 script = ExtResource( 21 )
 
 [node name="root" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_left = -0.00130355
 anchor_right = 0.998696
 anchor_bottom = 1.0
@@ -124,7 +125,6 @@ margin_bottom = 520.0
 golem_number = 3
 
 [node name="ActionBar" type="HBoxContainer" parent="root"]
-visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -133,6 +133,8 @@ margin_left = -220.0
 margin_top = -90.0
 margin_right = 220.0
 margin_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 0
 custom_constants/separation = 10
 alignment = 1
@@ -195,6 +197,16 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 16 )
 texture_hover = ExtResource( 4 )
 
+[node name="Crater2" type="TextureButton" parent="root/ActionBar"]
+margin_left = 540.0
+margin_right = 620.0
+margin_bottom = 80.0
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 22 )
+
 [node name="CrystalStability" parent="root" instance=ExtResource( 2 )]
 anchor_left = 1.0
 anchor_bottom = 0.0
@@ -205,7 +217,6 @@ margin_bottom = 80.0
 grow_horizontal = 0
 
 [node name="SkillPopUp" parent="root" instance=ExtResource( 9 )]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -214,6 +225,10 @@ margin_left = -210.488
 margin_top = -143.973
 margin_right = -10.4882
 margin_bottom = -23.9729
+
+[node name="TextureButton" type="TextureButton" parent="root"]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Start"
