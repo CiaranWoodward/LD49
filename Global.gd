@@ -5,10 +5,16 @@ signal player_selected(id, player)
 signal skill_selected(id)
 signal gamestate_changed(newstate)
 signal players_modified()
+signal movecost_calculated(newcost)
 
 enum CollisionLayer {
 	SCENERY = 1<<0,
 	SELECTABLE_SCENERY = 1<<10
+}
+
+enum SelectMask {
+	MOUSE_OVER = 1<<0,
+	PLAYER_ON = 1<<1
 }
 
 enum SkillType {
@@ -29,6 +35,7 @@ var players = []
 var selected_player = null setget _set_selected_player
 var selected_skill = SkillType.None setget _set_selected_skill
 var current_gamestate = GameState.PlayerTurn
+var current_movecost = 0 setget _set_movecost
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -51,3 +58,9 @@ func _set_gamestate(new):
 func add_player(new_player):
 	players.append(new_player)
 	emit_signal("players_modified")
+
+func _set_movecost(new):
+	if new == current_movecost:
+		return
+	current_movecost = new
+	emit_signal("movecost_calculated", new)

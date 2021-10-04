@@ -15,6 +15,8 @@ var visual_height_offset : float = 0
 # For the A* algorithm tracking
 var id = 0
 
+var selected_mask = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	topperheight = $GrassTopper.mesh.size.y
@@ -66,9 +68,14 @@ func get_platform_visual_pos() -> Vector3:
 	retval.y += self.visual_height_offset
 	return retval
 
-func set_selected(selected : bool):
-	$"GrassTopper/Selected".visible = selected
+func set_selected(mask : int):
+	selected_mask |= mask
+	$"GrassTopper/Selected".visible = (selected_mask != 0)
 
+func set_unselected(mask : int):
+	selected_mask &= ~mask
+	$"GrassTopper/Selected".visible = (selected_mask != 0)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #	pass

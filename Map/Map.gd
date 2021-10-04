@@ -147,12 +147,12 @@ func get_vec_path(from, to):
 	#caching
 	if from == prevfrom and to == prevto:
 		return prevresult
-	prevfrom = from
-	prevto = to
 	var pp = astarmap.get_id_path(from.id, to.id)
 	var list = []
 	for id in pp:
 		list.append(id2chunk[id].get_platform_pos() + Vector3(0, 1, 0))
+	prevfrom = from
+	prevto = to
 	prevresult = list
 	return list
 
@@ -167,14 +167,15 @@ func _physics_process(delta: float) -> void:
 				pass# TODO: Trigger move
 		if (event is InputEventMouseMotion):
 			if is_instance_valid(prevselected):
-				prevselected.set_selected(false)
+				prevselected.set_unselected(Global.SelectMask.MOUSE_OVER)
 			prevselected = $Camera.get_scenery_at_point(event.position)
 			if is_instance_valid(prevselected):
-				prevselected.set_selected(true)
+				prevselected.set_selected(Global.SelectMask.MOUSE_OVER)
 				if Global.selected_skill == Global.SkillType.MoveMelee or Global.selected_skill == Global.SkillType.MoveRanged:
 					$LineRenderer.visible = true
 					var path = get_vec_path(Global.selected_player.map_chunk, prevselected)
 					$LineRenderer.points = path
+					Global.current_movecost = ceil(len(path) / Global.selected_player.speed)
 				else:
 					$LineRenderer.visible = false
 		if event.is_action_pressed("ui_cancel"):
