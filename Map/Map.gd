@@ -225,6 +225,8 @@ func _physics_process(delta: float) -> void:
 					Global.selected_player = clicked
 				elif Global.is_move_skill_selected() and is_instance_valid(Global.selected_player):
 					Global.selected_player.move(get_mc_path(prevfrom, prevto), Global.current_movecost)
+				elif Global.is_attack_skill_selected() and is_instance_valid(Global.selected_player):
+					Global.selected_player.attack(clicked)
 		if (event is InputEventMouseMotion):
 			if is_instance_valid(prevselected):
 				prevselected.set_unselected(Global.SelectMask.MOUSE_OVER)
@@ -239,5 +241,6 @@ func _physics_process(delta: float) -> void:
 					_set_move_annotation_color(get_mc_path(Global.selected_player.map_chunk, prevselected), Global.current_movecost)
 				else:
 					$LineRenderer.visible = false
+				
 		if event.is_action_pressed("ui_cancel"):
 			Global.selected_player = null

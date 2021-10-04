@@ -4,7 +4,7 @@ signal stats_changed
 
 export var move_animation_speed : float = 30.0
 export var max_ap : int = 5
-export var max_health : int = 10
+export var max_health : int = 5
 export var speed : float = 1.0
 
 const golem_type = Global.EnemyType.Baby
@@ -33,6 +33,16 @@ func _ready() -> void:
 
 func is_enemy():
 	return true
+
+func damage(dam):
+	health -= dam
+	if health < 0:
+		Global.remove_enemy(self)
+		_change_chunk(null)
+		stateMachine.travel("Die")
+		tween.interpolate_callback(self, 2, "queue_free")
+	else:
+		stateMachine.travel("Hit")
 
 func _handle_enemy_changed(enemy):
 	if enemy == self:
@@ -139,5 +149,5 @@ func _process(delta: float) -> void:
 	else:
 		if is_instance_valid(map_chunk):
 			self.translation = map_chunk.get_platform_visual_pos()
-		else:
+		elif health > 0:
 			_change_chunk(Global.map.get_random_edge_chunk())

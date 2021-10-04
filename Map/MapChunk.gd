@@ -88,7 +88,3 @@ func set_selected(mask : int):
 func set_unselected(mask : int):
 	selected_mask &= ~mask
 	$"GrassTopper/Selected".visible = (selected_mask != 0)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass

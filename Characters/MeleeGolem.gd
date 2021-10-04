@@ -3,9 +3,12 @@ extends RigidBody
 signal stats_changed
 
 export var move_animation_speed : float = 30.0
-export var max_ap : int = 10
+export var max_ap : int = 6
 export var max_health : int = 10
 export var speed : float = 4.0
+export var attack_ap : int = 2
+export var damage_min : int = 4
+export var damage_max : int = 7
 
 const golem_type = Global.GolemType.Melee
 
@@ -46,6 +49,18 @@ func _handle_player_selected(_id, player):
 func _handle_gamestate_changed(newstate):
 	if newstate == Global.GameState.PlayerTurn:
 		ap = max_ap
+		emit_signal("stats_changed")
+
+func attack(enemy) -> bool:
+	if is_instance_valid(enemy) and enemy.has_method("is_enemy") and enemy.is_enemy():
+		if ap >= attack_ap and Global.is_adjacent_mc(enemy.map_chunk, map_chunk):
+			var damage = (randi() % (damage_max + 1 - damage_min)) + damage_min
+			enemy.damage(damage)
+			ap -= attack_ap
+			emit_signal("stats_changed")
+			stateMachine.travel("FrontAttack")
+			return true
+	return false
 
 func is_move_valid(pathf, cost) -> bool:
 	if cost > ap:

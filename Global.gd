@@ -119,6 +119,9 @@ func is_adjacent(x1, z1, x2, z2):
 		return true
 	return false
 
+func is_adjacent_mc(m1, m2):
+	return is_adjacent(m1.x, m1.z, m2.x, m2.z)
+
 func add_player(new_player):
 	players.append(new_player)
 	emit_signal("players_modified")
@@ -126,9 +129,15 @@ func add_player(new_player):
 func add_enemy(new_enemy):
 	enemies.append(new_enemy)
 
+func remove_enemy(enem):
+	enemies.erase(enem)
+
 func regen_done():
 	if current_gamestate == GameState.MapTurn:
 		_set_gamestate(GameState.PlayerTurn)
 
 func is_move_skill_selected():
 	return (selected_skill == SkillType.MoveMelee or selected_skill == SkillType.MoveRanged)
+
+func is_attack_skill_selected():
+	return (selected_skill == SkillType.Ranged or selected_skill == SkillType.Melee)
