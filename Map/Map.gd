@@ -147,9 +147,15 @@ func get_random_chunk():
 	var i = randi() % len(mapset)
 	return mapset[i]
 
-func get_random_edge_chunk():
+func _get_random_edge_chunk():
 	var i = randi() % len(mapedgeset)
 	return mapedgeset[i]
+
+func get_random_edge_chunk(allow_occupied : bool = false):
+	var retval = _get_random_edge_chunk()
+	while (!allow_occupied) && retval.is_occupied():
+		retval = _get_random_edge_chunk()
+	return retval
 
 func _gen_chunk(x : int, z : int, displaceval) -> void:
 	var dist = sqrt(x*x + z*z)

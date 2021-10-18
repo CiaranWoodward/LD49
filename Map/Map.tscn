@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Map/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Map/Map.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://LineRenderer/LineRenderer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Characters/MeleeGolem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Characters/RangedGolem.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Map/BGM.gd" type="Script" id=7]
 [ext_resource path="res://Characters/BabyShadow.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Map/Crystal.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Map/AnnotationMaterial.tres" type="Material" id=11]
@@ -102,11 +103,14 @@ material_override = ExtResource( 11 )
 cast_shadow = 0
 
 [node name="Crystal" parent="." instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17.4282, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.0266, 0 )
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
 volume_db = -10.0
 autoplay = true
+script = ExtResource( 7 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[connection signal="finished" from="BGM" to="BGM" method="_on_BGM_finished"]
