@@ -4,7 +4,7 @@ signal stats_changed
 
 export var move_animation_speed : float = 30.0
 export var max_ap : int = 4
-export var max_health : int = 5
+export var max_health : int = 15
 export var speed : float = 4.0
 export var mindamage : int = 6
 export var maxdamage : int = 9
@@ -44,6 +44,7 @@ func damage(dam):
 		_change_chunk(null)
 		stateMachine.travel("Die")
 		tween.interpolate_callback(self, 2, "queue_free")
+		tween.start()
 	else:
 		stateMachine.travel("Hit")
 

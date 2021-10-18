@@ -4,7 +4,7 @@ signal stats_changed
 
 export var move_animation_speed : float = 30.0
 export var max_ap : int = 5
-export var max_health : int = 5
+export var max_health : int = 7
 export var speed : float = 2.0
 
 const golem_type = Global.EnemyType.Baby
@@ -41,6 +41,7 @@ func damage(dam):
 		_change_chunk(null)
 		stateMachine.travel("Die")
 		tween.interpolate_callback(self, 2, "queue_free")
+		tween.start()
 	else:
 		stateMachine.travel("Hit")
 

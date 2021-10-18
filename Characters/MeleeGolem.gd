@@ -48,7 +48,10 @@ func _handle_player_selected(_id, player):
 
 func _handle_gamestate_changed(newstate):
 	if newstate == Global.GameState.PlayerTurn:
-		ap = max_ap
+		if state == Global.PlayerState.Dead:
+			ap = 0
+		else:
+			ap = max_ap
 		emit_signal("stats_changed")
 
 func attack(enemy) -> bool:
@@ -139,6 +142,8 @@ func _change_chunk(newchunk):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if state == Global.PlayerState.Moving:
+		pass
+	elif state == Global.PlayerState.Dead:
 		pass
 	else:
 		if is_instance_valid(map_chunk):
