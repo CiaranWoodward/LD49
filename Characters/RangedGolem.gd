@@ -4,7 +4,7 @@ signal stats_changed
 
 export var move_animation_speed : float = 30.0
 export var max_ap : int = 6
-export var max_health : int = 50
+export var max_health : int = 30
 export var speed : float = 3.0
 export var attack_ap : int = 2
 export var damage_min : int = 4

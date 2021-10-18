@@ -63,7 +63,7 @@ func set_displacement(displace : float, tweentime : float = 1.5):
 func set_exact_displacement(displace, tweentime : float = 1.5):
 	var old_plat_height = self.plat_height
 	self.plat_height = displace
-	var plat_height_diff = old_plat_height - plat_height
+	var plat_height_diff = (old_plat_height + visual_height_offset) - plat_height
 	self.translation.y = plat_height - (height/2)
 	tweentime *= rand_range(0.9, 1.1)
 	_set_visual_relative_height(plat_height_diff)

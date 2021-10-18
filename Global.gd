@@ -147,7 +147,7 @@ func _handle_mapturn():
 			_spawn_ranged(2)
 		15:
 			_spawn_baby(4)
-			_spawn_melee(1)
+			_spawn_melee(2)
 			_spawn_ranged(2)
 	if turn_counter > 15 and len(enemies) == 0:
 		_set_gamestate(GameState.GameWin)

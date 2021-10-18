@@ -22,6 +22,7 @@ func _evaluate_necessity():
 		self.visible = true
 		my_golem = Global.players[golem_number]
 		my_golem.connect("stats_changed", self, "_stat_update")
+		_stat_update()
 
 func _global_player_selected(id, player):
 	if id == golem_number:
