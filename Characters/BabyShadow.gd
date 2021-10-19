@@ -42,6 +42,7 @@ func damage(dam):
 		stateMachine.travel("Die")
 		tween.interpolate_callback(self, 2, "queue_free")
 		tween.start()
+		collision_layer = 0
 	else:
 		stateMachine.travel("Hit")
 

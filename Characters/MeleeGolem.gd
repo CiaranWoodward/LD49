@@ -54,15 +54,20 @@ func _handle_gamestate_changed(newstate):
 			ap = max_ap
 		emit_signal("stats_changed")
 
-func attack(enemy) -> bool:
+func is_attack_valid(enemy) -> bool:
 	if is_instance_valid(enemy) and enemy.has_method("is_enemy") and enemy.is_enemy():
 		if ap >= attack_ap and Global.is_adjacent_mc(enemy.map_chunk, map_chunk):
-			var damage = (randi() % (damage_max + 1 - damage_min)) + damage_min
-			enemy.damage(damage)
-			ap -= attack_ap
-			emit_signal("stats_changed")
-			stateMachine.travel("FrontAttack")
 			return true
+	return false
+
+func attack(enemy) -> bool:
+	if is_attack_valid(enemy):
+		var damage = (randi() % (damage_max + 1 - damage_min)) + damage_min
+		enemy.damage(damage)
+		ap -= attack_ap
+		emit_signal("stats_changed")
+		stateMachine.travel("FrontAttack")
+		return true
 	return false
 
 func damage(dam):

@@ -219,6 +219,16 @@ func _set_move_annotation_color(path, cost):
 	else:
 		_update_annotation_color(Color(1, 0, 0))
 
+func get_enemy_on_tile(mapchunk):
+	if !is_instance_valid(mapchunk):
+		return null
+	var occupant = mapchunk.occupant
+	if !is_instance_valid(occupant):
+		return null
+	if occupant.has_method("is_enemy") && occupant.is_enemy():
+		return occupant
+	return null
+
 var prevselected = null
 func _physics_process(delta: float) -> void:
 	while len(Global.unhandled_input_queue) > 0:
@@ -239,14 +249,24 @@ func _physics_process(delta: float) -> void:
 			prevselected = $Camera.get_scenery_at_point(event.position)
 			if is_instance_valid(prevselected):
 				prevselected.set_selected(Global.SelectMask.MOUSE_OVER)
-				if Global.is_move_skill_selected():
+				if Global.is_move_skill_selected() and is_instance_valid(Global.selected_player):
 					$LineRenderer.visible = true
 					var path = get_vec_path(Global.selected_player.map_chunk, prevselected)
 					$LineRenderer.points = path
 					Global.current_movecost = ceil((len(path) - 1) / Global.selected_player.speed)
 					_set_move_annotation_color(get_mc_path(Global.selected_player.map_chunk, prevselected), Global.current_movecost)
+				elif Global.is_attack_skill_selected() and is_instance_valid(Global.selected_player):
+					var enemy = get_enemy_on_tile(prevselected)
+					if is_instance_valid(enemy) and Global.selected_player.is_attack_valid(enemy):
+						$LineRenderer.visible = true
+						$LineRenderer.points = [Global.selected_player.translation + Vector3(0, 4, 0), enemy.translation + Vector3(0, 4, 0)]
+						_reset_annotation_color()
+					else:
+						$LineRenderer.visible = false
+						_update_annotation_color(Color(1, 0, 0))
 				else:
 					$LineRenderer.visible = false
+					_reset_annotation_color()
 				
 		if event.is_action_pressed("ui_cancel"):
 			Global.selected_player = null

@@ -55,23 +55,28 @@ func _handle_gamestate_changed(newstate):
 			ap = max_ap
 		emit_signal("stats_changed")
 
-func attack(enemy) -> bool:
+func is_attack_valid(enemy) -> bool:
 	if is_instance_valid(enemy) and enemy.has_method("is_enemy") and enemy.is_enemy():
 		var space_state = get_world().direct_space_state
 		var from = translation + projectile_offset
 		var to = enemy.translation + projectile_offset
 		var colinfo = space_state.intersect_ray(from, to, [], Global.CollisionLayer.SCENERY)
 		if ap >= attack_ap and len(colinfo) == 0:
-			var damage = (randi() % (damage_max + 1 - damage_min)) + damage_min
-			ap -= attack_ap
-			emit_signal("stats_changed")
-			stateMachine.travel("FrontAttack")
-			var proj = preload("res://Characters/Projectile.tscn").instance()
-			proj.target = enemy
-			proj.damage = damage
-			get_parent().add_child(proj)
-			proj.translation = translation + projectile_offset
 			return true
+	return false
+
+func attack(enemy) -> bool:
+	if is_attack_valid(enemy):
+		var damage = (randi() % (damage_max + 1 - damage_min)) + damage_min
+		ap -= attack_ap
+		emit_signal("stats_changed")
+		stateMachine.travel("FrontAttack")
+		var proj = preload("res://Characters/Projectile.tscn").instance()
+		proj.target = enemy
+		proj.damage = damage
+		get_parent().add_child(proj)
+		proj.translation = translation + projectile_offset
+		return true
 	return false
 
 func damage(dam):
