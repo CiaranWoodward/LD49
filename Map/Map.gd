@@ -243,7 +243,7 @@ func _physics_process(delta: float) -> void:
 					$LineRenderer.visible = true
 					var path = get_vec_path(Global.selected_player.map_chunk, prevselected)
 					$LineRenderer.points = path
-					Global.current_movecost = ceil(len(path) / Global.selected_player.speed)
+					Global.current_movecost = ceil((len(path) - 1) / Global.selected_player.speed)
 					_set_move_annotation_color(get_mc_path(Global.selected_player.map_chunk, prevselected), Global.current_movecost)
 				else:
 					$LineRenderer.visible = false
